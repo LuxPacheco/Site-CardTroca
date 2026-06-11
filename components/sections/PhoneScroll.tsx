@@ -132,30 +132,30 @@ interface TextRowProps {
 function TextRow({ screenIndex, idx, title, subtitle, icon }: TextRowProps) {
   const opacity = useTransform(
     screenIndex,
-    [idx - 0.65, idx - 0.25, idx + 0.25, idx + 0.65],
-    [0.22, 1, 1, 0.22]
+    [idx - 0.4, idx - 0.2, idx + 0.2, idx + 0.4],
+    [0, 1, 1, 0]
   );
-  const scale = useTransform(
+  const y = useTransform(
     screenIndex,
-    [idx - 0.65, idx - 0.25, idx + 0.25, idx + 0.65],
-    [0.96, 1, 1, 0.96]
+    [idx - 0.4, idx - 0.2, idx + 0.2, idx + 0.4],
+    [14, 0, 0, -14]
   );
   return (
     <motion.div
-      style={{ opacity, scale }}
-      className="flex items-start gap-4 p-4 rounded-2xl"
+      style={{ opacity, y }}
+      className="absolute inset-0 flex items-start gap-4 p-4 rounded-2xl"
     >
       <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
         {icon}
       </div>
       <div>
-        <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-2 mb-2">
           <span className="text-xs font-bold text-primary/70 uppercase tracking-wider">
             0{idx + 1}
           </span>
-          <h3 className="text-base font-bold text-ds-text-primary">{title}</h3>
+          <h3 className="text-sm lg:text-base font-bold text-ds-text-primary">{title}</h3>
         </div>
-        <p className="text-sm text-ds-text-secondary leading-relaxed">{subtitle}</p>
+        <p className="text-xs lg:text-sm text-ds-text-secondary leading-relaxed">{subtitle}</p>
       </div>
     </motion.div>
   );
@@ -310,7 +310,8 @@ export function PhoneScroll() {
 
             {/* ── Text column ── */}
             <div className="flex-1 min-w-0">
-              <div className="space-y-2">
+              {/* Stacked text — only active item visible */}
+              <div className="relative h-36 lg:h-44">
                 {screens.map((screen, idx) => (
                   <TextRow
                     key={screen.id}
@@ -324,7 +325,7 @@ export function PhoneScroll() {
               </div>
 
               {/* Progress bars */}
-              <div className="mt-6 flex gap-2" aria-hidden="true">
+              <div className="mt-4 flex gap-2" aria-hidden="true">
                 {screens.map((screen, idx) => (
                   <ProgressBar key={screen.id} screenIndex={screenIndex} idx={idx} />
                 ))}

@@ -72,7 +72,7 @@ export function Navigation() {
                   alt=""
                   width={36}
                   height={36}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-contain scale-[2]"
                   priority
                   unoptimized
                 />
