@@ -38,7 +38,7 @@ export function Search() {
             <PhoneMockup size="lg">
               <div className="relative h-full w-full">
                 <Image
-                  src="/images/buscar.png"
+                  src="/images/buscar.webp"
                   alt=""
                   fill
                   unoptimized

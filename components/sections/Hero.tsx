@@ -13,7 +13,7 @@ function HeroAppScreen() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/images/home.png"
+        src="/images/home.webp"
         alt=""
         fill
         priority

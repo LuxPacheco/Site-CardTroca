@@ -45,7 +45,7 @@ export function Wishlist() {
             <PhoneMockup size="lg">
               <div className="relative h-full w-full">
                 <Image
-                  src="/images/desejos.png"
+                  src="/images/desejos.webp"
                   alt=""
                   fill
                   unoptimized

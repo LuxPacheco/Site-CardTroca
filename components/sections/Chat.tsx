@@ -33,7 +33,7 @@ export function Chat() {
             <PhoneMockup size="lg">
               <div className="relative h-full w-full">
                 <Image
-                  src="/images/avaliacao.png"
+                  src="/images/avaliacao.webp"
                   alt=""
                   fill
                   unoptimized

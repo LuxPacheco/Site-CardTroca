@@ -72,7 +72,7 @@ export function Navigation() {
             >
               <div className="h-[58px] w-[58px] overflow-hidden flex-shrink-0">
                 <Image
-                  src="/splash_logo.png"
+                  src="/splash_logo.webp"
                   alt=""
                   width={56}
                   height={56}

@@ -37,7 +37,7 @@ export function MatchSystem() {
             <PhoneMockup size="lg">
               <div className="relative h-full w-full">
                 <Image
-                  src="/images/swipe.png"
+                  src="/images/swipe.webp"
                   alt=""
                   fill
                   unoptimized
@@ -114,7 +114,7 @@ export function MatchSystem() {
             <PhoneMockup size="lg">
               <div className="relative h-full w-full">
                 <Image
-                  src="/images/match.png"
+                  src="/images/match.webp"
                   alt=""
                   fill
                   unoptimized

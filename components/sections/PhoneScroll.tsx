@@ -18,7 +18,7 @@ function FeedScreen() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/images/proximas.png"
+        src="/images/proximas.webp"
         alt=""
         fill
         unoptimized
@@ -34,7 +34,7 @@ function MapScreen() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/images/localizacao.png"
+        src="/images/localizacao.webp"
         alt=""
         fill
         unoptimized
@@ -50,7 +50,7 @@ function TradeSetupScreen() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/images/troca1.png"
+        src="/images/troca1.webp"
         alt=""
         fill
         unoptimized
@@ -66,7 +66,7 @@ function TradeSwipeScreen() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/images/troca2.png"
+        src="/images/troca2.webp"
         alt=""
         fill
         unoptimized
@@ -82,7 +82,7 @@ function ChatScreen() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/images/chat2.png"
+        src="/images/chat2.webp"
         alt=""
         fill
         unoptimized

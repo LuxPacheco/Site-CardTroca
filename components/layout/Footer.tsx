@@ -49,7 +49,7 @@ export function Footer() {
                 className="w-9 h-9 rounded-xl flex items-center justify-center overflow-hidden bg-white"
               >
                 <Image
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt=""
                   width={36}
                   height={36}
