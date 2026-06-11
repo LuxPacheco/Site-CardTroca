@@ -64,19 +64,15 @@ export function Navigation() {
               className="flex items-center gap-2.5 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
               aria-label="CardTroca — Início"
             >
-              <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center shadow-primary-glow flex-shrink-0 overflow-hidden bg-white"
-              >
-                <Image
-                  src="/splash_logo.png"
-                  alt=""
-                  width={36}
-                  height={36}
-                  className="h-full w-full object-contain scale-[2]"
-                  priority
-                  unoptimized
-                />
-              </div>
+              <Image
+                src="/splash_logo.png"
+                alt=""
+                width={64}
+                height={64}
+                className="h-14 w-14 object-contain flex-shrink-0 scale-150"
+                priority
+                unoptimized
+              />
               <span className="font-bold text-ds-text-primary text-lg tracking-tight hidden sm:block">
                 CardTroca
               </span>
