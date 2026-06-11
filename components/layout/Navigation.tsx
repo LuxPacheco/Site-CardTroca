@@ -66,11 +66,11 @@ export function Navigation() {
             >
               <div className="h-12 w-12 lg:h-14 lg:w-14 overflow-hidden flex-shrink-0">
                 <Image
-                  src="/app-icon.png"
+                  src="/splash_logo.png"
                   alt=""
                   width={56}
                   height={56}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-contain scale-[2.05]"
                   priority
                   unoptimized
                 />
