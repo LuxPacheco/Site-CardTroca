@@ -57,7 +57,7 @@ export function AppDownloadButton({
       fullWidth={fullWidth}
       icon={<Download className="w-4 h-4" />}
       className={className}
-      onClick={() => {}}
+      disabled
     >
       Em breve
     </Button>
