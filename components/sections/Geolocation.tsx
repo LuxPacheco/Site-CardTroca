@@ -144,7 +144,7 @@ export function Geolocation() {
             <div className="flex justify-center gap-6 mt-8">
               {[
                 { value: "200km", label: "Raio ajustável" },
-                { value: "25km", label: "Busca inicial" },
+                { value: "10km", label: "Busca inicial" },
                 { value: "GPS", label: "ou cidade cadastrada" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
