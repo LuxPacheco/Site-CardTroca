@@ -2,12 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerLinks = {
-  produto: [
-    { label: "Funcionalidades", href: "/#funcionalidades" },
-    { label: "Como funciona", href: "/#como-funciona" },
-    { label: "Sistema de Match", href: "/#match" },
-    { label: "Planos", href: "/#planos" },
-  ],
   suporte: [
     { label: "Central de ajuda", href: "/central-de-ajuda" },
     { label: "Politica de privacidade", href: "/politica-de-privacidade" },
@@ -43,7 +37,7 @@ export function Footer() {
       aria-label="Rodapé"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div className="space-y-4">
             <a
@@ -77,20 +71,6 @@ export function Footer() {
                 Em desenvolvimento ativo
               </span>
             </div>
-          </div>
-
-          {/* Produto */}
-          <div>
-            <h3 className="font-semibold text-ds-text-primary text-sm mb-4 uppercase tracking-wider">
-              Produto
-            </h3>
-            <ul className="space-y-3" role="list">
-              {footerLinks.produto.map((link) => (
-                <li key={link.label}>
-                  {renderLink(link)}
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Suporte */}
