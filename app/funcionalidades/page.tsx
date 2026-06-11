@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { MatchSystem } from "@/components/sections/MatchSystem";
@@ -11,15 +12,16 @@ import { Chat } from "@/components/sections/Chat";
 import { cn } from "@/lib/utils";
 
 const features = [
-  { id: "match", label: "Sistema de Match", component: <MatchSystem /> },
-  { id: "geolocalizacao", label: "Geolocalização", component: <Geolocation /> },
-  { id: "busca", label: "Busca Inteligente", component: <Search /> },
-  { id: "desejos", label: "Lista de Desejos", component: <Wishlist /> },
-  { id: "chat", label: "Chat e Negociação", component: <Chat /> },
+  { id: "match", label: "Sistema de Match", component: MatchSystem },
+  { id: "geolocalizacao", label: "Geolocalização", component: Geolocation },
+  { id: "busca", label: "Busca Inteligente", component: Search },
+  { id: "desejos", label: "Lista de Desejos", component: Wishlist },
+  { id: "chat", label: "Chat e Negociação", component: Chat },
 ];
 
 export default function FuncionalidadesPage() {
   const [active, setActive] = useState(0);
+  const ActiveComponent = features[active].component;
 
   return (
     <>
@@ -49,11 +51,9 @@ export default function FuncionalidadesPage() {
         </div>
 
         {/* Desktop: sidebar + content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div className="hidden lg:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex gap-8 items-start">
-
-            {/* Vertical sidebar — desktop only */}
-            <aside className="hidden lg:flex flex-col gap-2 w-56 flex-shrink-0 sticky top-28">
+            <aside className="flex flex-col gap-2 w-56 flex-shrink-0 sticky top-28">
               <p className="text-xs font-semibold text-ds-text-tertiary uppercase tracking-widest mb-2 px-3">
                 Funcionalidades
               </p>
@@ -72,18 +72,34 @@ export default function FuncionalidadesPage() {
                 </button>
               ))}
             </aside>
-
-            {/* Feature content */}
-            <div key={active} className="flex-1 min-w-0">
-              {features[active].component}
-            </div>
-
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={features[active].id}
+                className="flex-1 min-w-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ActiveComponent />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
         {/* Mobile content */}
-        <div key={`mobile-${active}`} className="lg:hidden">
-          {features[active].component}
+        <div className="lg:hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={features[active].id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ActiveComponent />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </main>

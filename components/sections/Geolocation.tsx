@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MapPin, Clock, Shield, Users, Navigation } from "lucide-react";
 
@@ -13,11 +12,11 @@ const benefits = [
 ];
 
 const nearbyUsers = [
-  { initial: "L", name: "Lucas", dist: "0.8km", cards: 12, color: "from-orange-500 to-red-600", angle: 45, radius: 140 },
-  { initial: "A", name: "Ana", dist: "1.2km", cards: 8, color: "from-blue-500 to-teal-600", angle: 140, radius: 155 },
-  { initial: "P", name: "Pedro", dist: "2.1km", cards: 24, color: "from-yellow-500 to-amber-600", angle: 220, radius: 148 },
-  { initial: "C", name: "Carol", dist: "2.8km", cards: 6, color: "from-slate-700 to-teal-800", angle: 310, radius: 150 },
-  { initial: "M", name: "Mario", dist: "1.5km", cards: 15, color: "from-emerald-500 to-teal-600", angle: 90, radius: 160 },
+  { initial: "L", name: "Lucas", dist: "0.8km", color: "from-orange-500 to-red-600", angle: 45, radius: 140 },
+  { initial: "A", name: "Ana", dist: "1.2km", color: "from-blue-500 to-teal-600", angle: 140, radius: 155 },
+  { initial: "P", name: "Pedro", dist: "2.1km", color: "from-yellow-500 to-amber-600", angle: 220, radius: 148 },
+  { initial: "C", name: "Carol", dist: "2.8km", color: "from-slate-700 to-teal-800", angle: 310, radius: 150 },
+  { initial: "M", name: "Mario", dist: "1.5km", color: "from-emerald-500 to-teal-600", angle: 90, radius: 160 },
 ];
 
 function RadarMap() {
@@ -25,29 +24,23 @@ function RadarMap() {
 
   return (
     <div className="relative w-80 h-80 sm:w-96 sm:h-96 mx-auto flex items-center justify-center">
-      {/* Background glow */}
       <div
         className="absolute inset-0 rounded-full blur-3xl opacity-20"
         style={{ background: "radial-gradient(circle, rgba(14,147,132,0.5) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
 
-      {/* Rings */}
       {[1, 2, 3].map((ring) => (
         <motion.div
           key={ring}
           className="absolute rounded-full border border-primary/20"
-          style={{
-            width: ring * 100,
-            height: ring * 100,
-          }}
+          style={{ width: ring * 100, height: ring * 100 }}
           animate={shouldReduce ? {} : { scale: [1, 1.04, 1], opacity: [0.5, 0.3, 0.5] }}
           transition={{ duration: 3, repeat: Infinity, delay: ring * 0.5, ease: "easeInOut" }}
           aria-hidden="true"
         />
       ))}
 
-      {/* Grid lines */}
       <div
         className="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full opacity-10"
         style={{
@@ -59,7 +52,6 @@ function RadarMap() {
         aria-hidden="true"
       />
 
-      {/* Pulse rings (animated) */}
       {!shouldReduce && [0, 1, 2].map((i) => (
         <motion.div
           key={i}
@@ -71,22 +63,17 @@ function RadarMap() {
         />
       ))}
 
-      {/* Nearby users */}
       {nearbyUsers.map((user, i) => {
         const rad = (user.angle * Math.PI) / 180;
         const x = Math.cos(rad) * (user.radius / 1.8);
         const y = Math.sin(rad) * (user.radius / 1.8);
 
         return (
-          <motion.div
+          <div
             key={user.initial}
             className="absolute flex flex-col items-center"
             style={{ left: "50%", top: "50%", marginLeft: x - 16, marginTop: y - 16 }}
-            initial={shouldReduce ? {} : { opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 + i * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Connecting line */}
             <div
               className="absolute opacity-20"
               style={{
@@ -109,11 +96,10 @@ function RadarMap() {
             <div className="mt-1 bg-black/70 dark:bg-white/10 backdrop-blur-sm rounded-full px-2 py-0.5 border border-white/10">
               <span className="text-white text-[8px] font-medium whitespace-nowrap">{user.dist}</span>
             </div>
-          </motion.div>
+          </div>
         );
       })}
 
-      {/* Center — you */}
       <div className="relative z-20">
         <div
           className="w-16 h-16 rounded-full shadow-primary-glow-lg flex items-center justify-center"
@@ -121,7 +107,6 @@ function RadarMap() {
         >
           <span className="text-white font-black text-lg">Eu</span>
         </div>
-        {/* Location badge */}
         <motion.div
           className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-ds-bg border border-ds-border rounded-full px-2 py-0.5 shadow-elevation-2"
           animate={shouldReduce ? {} : { y: [0, -2, 0] }}
@@ -136,17 +121,12 @@ function RadarMap() {
 }
 
 export function Geolocation() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px 0px" });
-  const shouldReduce = useReducedMotion();
-
   return (
     <section
       id="geolocalizacao"
       aria-label="Geolocalização"
       className="section-padding bg-ds-bg-secondary relative overflow-hidden"
     >
-      {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
@@ -156,18 +136,11 @@ export function Geolocation() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Radar visualization */}
-          <motion.div
-            className="order-2 lg:order-1"
-            initial={shouldReduce ? {} : { opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="order-2 lg:order-1">
             <RadarMap />
 
-            {/* Stats row */}
             <div className="flex justify-center gap-6 mt-8">
               {[
                 { value: "200km", label: "Raio ajustável" },
@@ -180,15 +153,9 @@ export function Geolocation() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Content */}
-          <motion.div
-            className="order-1 lg:order-2"
-            initial={shouldReduce ? {} : { opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="order-1 lg:order-2">
             <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
               Geolocalização
             </p>
@@ -201,25 +168,20 @@ export function Geolocation() {
               a ordenar oportunidades, reduzir deslocamentos e facilitar conversas de troca ou venda.
             </p>
 
-            {/* Benefits */}
             <div className="grid grid-cols-2 gap-3 mb-8">
-              {benefits.map((benefit, i) => (
-                <motion.div
+              {benefits.map((benefit) => (
+                <div
                   key={benefit.text}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-ds-surface border border-ds-border hover:border-primary/30 transition-colors duration-300"
-                  initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.3 + i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex items-center gap-3 p-4 rounded-xl bg-ds-surface border border-ds-border"
                 >
                   <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
                     {benefit.icon}
                   </div>
                   <span className="text-sm font-medium text-ds-text-primary">{benefit.text}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            {/* Distance selector mockup */}
             <GlassCard variant="elevated" padding="md" rounded="xl">
               <p className="text-xs font-semibold text-ds-text-tertiary mb-3 uppercase tracking-wider">
                 Raio de busca
@@ -242,7 +204,7 @@ export function Geolocation() {
                 Configure o raio de busca usando GPS ou a localização cadastrada no perfil.
               </p>
             </GlassCard>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

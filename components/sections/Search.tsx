@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { SlidersHorizontal, MapPin, Star, Tag, Package } from "lucide-react";
 
@@ -15,9 +14,6 @@ const filters = [
 ];
 
 export function Search() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px 0px" });
-  const shouldReduce = useReducedMotion();
   const [activeFilter, setActiveFilter] = useState(0);
 
   return (
@@ -35,22 +31,35 @@ export function Search() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-row items-start gap-3 lg:gap-16 lg:flex-row-reverse">
+          {/* Phone — left on mobile, right on desktop */}
+          <div className="flex-shrink-0">
+            <PhoneMockup size="lg">
+              <div className="relative h-full w-full">
+                <Image
+                  src="/images/buscar.png"
+                  alt=""
+                  fill
+                  unoptimized
+                  sizes="300px"
+                  className="object-cover"
+                  draggable={false}
+                />
+              </div>
+            </PhoneMockup>
+          </div>
+
           {/* Content */}
-          <motion.div
-            initial={shouldReduce ? {} : { opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
               Busca inteligente
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-ds-text-primary leading-tight mb-6">
+            <h2 className="text-xl sm:text-3xl lg:text-5xl font-black text-ds-text-primary leading-tight mb-4">
               Encontre exatamente{" "}
               <span className="text-gradient-primary">o que procura.</span>
             </h2>
-            <p className="text-lg text-ds-text-secondary leading-relaxed mb-4">
+            <p className="text-sm sm:text-lg text-ds-text-secondary leading-relaxed mb-4">
               Pesquise no catálogo e encontre anúncios à venda por nome ou código da carta.
             </p>
             <p className="text-base text-ds-text-secondary leading-relaxed mb-10">
@@ -58,15 +67,11 @@ export function Search() {
               reputação do usuário e ordenação por resultados recentes.
             </p>
 
-            {/* Filter list */}
             <div className="space-y-3">
               {filters.map((filter, i) => (
-                <motion.div
+                <div
                   key={filter.label}
                   className="flex items-center gap-3 cursor-pointer group"
-                  initial={shouldReduce ? {} : { opacity: 0, x: -16 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.2 + i * 0.08, duration: 0.5 }}
                   onClick={() => setActiveFilter(i)}
                 >
                   <div
@@ -85,32 +90,10 @@ export function Search() {
                   >
                     Ordenar por {filter.label}
                   </span>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
-
-          {/* Search screen */}
-          <motion.div
-            initial={shouldReduce ? {} : { opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center lg:justify-end"
-          >
-            <PhoneMockup size="lg">
-              <div className="relative h-full w-full">
-                <Image
-                  src="/images/buscar.png"
-                  alt=""
-                  fill
-                  unoptimized
-                  sizes="300px"
-                  className="object-cover"
-                  draggable={false}
-                />
-              </div>
-            </PhoneMockup>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

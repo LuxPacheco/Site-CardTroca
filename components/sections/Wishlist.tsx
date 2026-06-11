@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { Heart, Bell, Sparkles } from "lucide-react";
 
@@ -25,10 +23,6 @@ const benefits = [
 ];
 
 export function Wishlist() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px 0px" });
-  const shouldReduce = useReducedMotion();
-
   return (
     <section
       id="lista-de-desejos"
@@ -44,15 +38,10 @@ export function Wishlist() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Wishlist screen */}
-          <motion.div
-            initial={shouldReduce ? {} : { opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center lg:justify-start"
-          >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-row items-start gap-3 lg:gap-16">
+          {/* Wishlist screen — left always */}
+          <div className="flex-shrink-0">
             <PhoneMockup size="lg">
               <div className="relative h-full w-full">
                 <Image
@@ -66,36 +55,25 @@ export function Wishlist() {
                 />
               </div>
             </PhoneMockup>
-          </motion.div>
+          </div>
 
           {/* Content */}
-          <motion.div
-            initial={shouldReduce ? {} : { opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
               Lista de desejos
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-ds-text-primary leading-tight mb-6">
+            <h2 className="text-xl sm:text-3xl lg:text-5xl font-black text-ds-text-primary leading-tight mb-4">
               Monte sua lista{" "}
               <span className="text-gradient-primary">de desejos.</span>
             </h2>
-            <p className="text-lg text-ds-text-secondary leading-relaxed mb-10">
+            <p className="text-sm sm:text-lg text-ds-text-secondary leading-relaxed mb-6 sm:mb-10">
               Adicione cartas que deseja encontrar e use essa lista para orientar buscas,
               destaques e o modo troca.
             </p>
 
-            {/* Benefits */}
             <div className="space-y-6">
-              {benefits.map((benefit, i) => (
-                <motion.div
-                  key={benefit.title}
-                  className="flex items-start gap-4"
-                  initial={shouldReduce ? {} : { opacity: 0, x: 20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.3 + i * 0.12, duration: 0.5 }}
-                >
+              {benefits.map((benefit) => (
+                <div key={benefit.title} className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
                     {benefit.icon}
                   </div>
@@ -103,23 +81,17 @@ export function Wishlist() {
                     <h3 className="font-bold text-ds-text-primary mb-1">{benefit.title}</h3>
                     <p className="text-sm text-ds-text-secondary leading-relaxed">{benefit.desc}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            {/* CTA hint */}
-            <motion.div
-              className="mt-10 p-4 rounded-2xl bg-primary/8 border border-primary/15"
-              initial={shouldReduce ? {} : { opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.6 }}
-            >
+            <div className="mt-10 p-4 rounded-2xl bg-primary/8 border border-primary/15">
               <p className="text-sm text-primary font-medium flex items-center gap-2">
                 <Sparkles className="w-4 h-4 flex-shrink-0" />
                 Quanto melhor sua lista, mais fácil configurar uma troca relevante.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

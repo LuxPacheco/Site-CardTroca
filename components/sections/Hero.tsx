@@ -119,16 +119,17 @@ export function Hero() {
               lista de desejos, modo troca, chat e reputação.
             </motion.p>
 
-            <motion.div variants={item} className="flex flex-col gap-4">
+            <motion.div variants={item} className="inline-flex flex-col gap-4">
               <Button
                 variant="primary"
                 size="lg"
                 icon={<Download className="w-5 h-5" />}
+                fullWidth
                 disabled
               >
                 Faça o Download do App
               </Button>
-              <div className="flex flex-row gap-3 flex-wrap">
+              <div className="flex flex-row gap-3">
                 <AppStoreBadgeButton store="apple" />
                 <AppStoreBadgeButton store="google" />
               </div>

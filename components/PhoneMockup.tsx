@@ -10,24 +10,42 @@ interface PhoneMockupProps {
   style?: React.CSSProperties;
 }
 
-const sizes = {
-  sm: "w-[160px] sm:w-[200px]",
-  md: "w-[200px] sm:w-[260px]",
-  lg: "w-[220px] sm:w-[300px]",
+// All radius values are proportional to 300px base (the original design size).
+// lg: 145px mobile (×0.48), 220px sm (×0.73), 300px lg (×1.0)
+// md: 150px mobile (×0.50), 220px sm (×0.73)
+// sm: 120px mobile (×0.40), 180px sm (×0.60)
+const sizeConfig = {
+  sm: {
+    width: "w-[120px] sm:w-[180px]",
+    outerRadius: "rounded-[18px] sm:rounded-[26px]",
+    innerRadius: "rounded-[17px] sm:rounded-[25px]",
+  },
+  md: {
+    width: "w-[150px] sm:w-[220px]",
+    outerRadius: "rounded-[22px] sm:rounded-[32px]",
+    innerRadius: "rounded-[21px] sm:rounded-[31px]",
+  },
+  lg: {
+    width: "w-[145px] sm:w-[220px] lg:w-[300px]",
+    outerRadius: "rounded-[21px] sm:rounded-[32px] lg:rounded-[44px]",
+    innerRadius: "rounded-[20px] sm:rounded-[31px] lg:rounded-[42px]",
+  },
 };
 
 export const PhoneMockup = forwardRef<HTMLDivElement, PhoneMockupProps>(
   ({ children, className, size = "md", style }, ref) => {
+    const config = sizeConfig[size];
+
     return (
       <div
         ref={ref}
-        className={cn("relative select-none", sizes[size], className)}
+        className={cn("relative select-none", config.width, className)}
         style={{ perspective: "1000px", ...style }}
         aria-hidden="true"
       >
         {/* Phone outer frame */}
         <div
-          className="relative rounded-[44px] overflow-hidden"
+          className={cn("relative overflow-hidden", config.outerRadius)}
           style={{
             background: "linear-gradient(160deg, #272D36 0%, #1C2128 40%, #14171C 100%)",
             padding: "3px",
@@ -35,7 +53,7 @@ export const PhoneMockup = forwardRef<HTMLDivElement, PhoneMockupProps>(
         >
           {/* Frame highlight */}
           <div
-            className="absolute inset-0 rounded-[44px] pointer-events-none z-10"
+            className={cn("absolute inset-0 pointer-events-none z-10", config.outerRadius)}
             style={{
               background:
                 "linear-gradient(160deg, rgba(255,255,255,0.12) 0%, transparent 40%, rgba(255,255,255,0.04) 100%)",
@@ -43,32 +61,31 @@ export const PhoneMockup = forwardRef<HTMLDivElement, PhoneMockupProps>(
           />
 
           {/* Side buttons — left */}
-          <div className="absolute -left-[3px] top-24 w-[3px] h-8 bg-gradient-to-b from-gray-600 to-gray-700 rounded-l" />
-          <div className="absolute -left-[3px] top-36 w-[3px] h-12 bg-gradient-to-b from-gray-600 to-gray-700 rounded-l" />
-          <div className="absolute -left-[3px] top-52 w-[3px] h-12 bg-gradient-to-b from-gray-600 to-gray-700 rounded-l" />
+          <div className="absolute -left-[3px] top-[30%] w-[3px] h-[8%] bg-gradient-to-b from-gray-600 to-gray-700 rounded-l" />
+          <div className="absolute -left-[3px] top-[40%] w-[3px] h-[10%] bg-gradient-to-b from-gray-600 to-gray-700 rounded-l" />
+          <div className="absolute -left-[3px] top-[54%] w-[3px] h-[10%] bg-gradient-to-b from-gray-600 to-gray-700 rounded-l" />
 
           {/* Side button — right */}
-          <div className="absolute -right-[3px] top-32 w-[3px] h-16 bg-gradient-to-b from-gray-600 to-gray-700 rounded-r" />
+          <div className="absolute -right-[3px] top-[38%] w-[3px] h-[13%] bg-gradient-to-b from-gray-600 to-gray-700 rounded-r" />
 
           {/* Screen */}
           <div
-            className="relative bg-black rounded-[42px] overflow-hidden"
+            className={cn("relative bg-black overflow-hidden", config.innerRadius)}
             style={{ aspectRatio: "9 / 19.5" }}
           >
             {/* Dynamic Island */}
             <div
-              className="absolute top-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center"
+              className="absolute top-[2%] left-1/2 -translate-x-1/2 z-20 flex items-center justify-center"
               style={{
-                width: "100px",
-                height: "28px",
+                width: "33%",
+                height: "6%",
                 background: "#000",
-                borderRadius: "14px",
+                borderRadius: "999px",
               }}
             >
-              {/* Camera and sensor indicators */}
-              <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-gray-900 border border-gray-800" />
-                <div className="w-1.5 h-1.5 rounded-full bg-gray-800" />
+              <div className="flex items-center gap-[15%]">
+                <div className="w-[22%] aspect-square rounded-full bg-gray-900 border border-gray-800" />
+                <div className="w-[16%] aspect-square rounded-full bg-gray-800" />
               </div>
             </div>
 
@@ -88,10 +105,10 @@ export const PhoneMockup = forwardRef<HTMLDivElement, PhoneMockupProps>(
 
             {/* Home indicator */}
             <div
-              className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20"
+              className="absolute bottom-[1.5%] left-1/2 -translate-x-1/2 z-20"
               style={{
-                width: "120px",
-                height: "4px",
+                width: "40%",
+                height: "3px",
                 background: "rgba(255,255,255,0.3)",
                 borderRadius: "2px",
               }}
