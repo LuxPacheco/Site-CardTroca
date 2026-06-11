@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AmplitudeProvider } from "@/components/AmplitudeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -86,7 +88,11 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-ds-bg text-ds-text-primary">
-        <ThemeProvider>{children}</ThemeProvider>
+        <Suspense>
+          <AmplitudeProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </AmplitudeProvider>
+        </Suspense>
       </body>
     </html>
   );
