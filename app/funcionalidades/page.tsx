@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
@@ -21,31 +21,45 @@ const features = [
 
 export default function FuncionalidadesPage() {
   const [active, setActive] = useState(0);
+  const mobileScrollerRef = useRef<HTMLDivElement>(null);
   const ActiveComponent = features[active].component;
+
+  const handleMobileScroll = () => {
+    const scroller = mobileScrollerRef.current;
+    if (!scroller) return;
+
+    const nextActive = Math.round(scroller.scrollLeft / scroller.clientWidth);
+    if (nextActive !== active && nextActive >= 0 && nextActive < features.length) {
+      setActive(nextActive);
+    }
+  };
 
   return (
     <>
       <Navigation />
       <main id="main-content" className="pt-16 lg:pt-18 min-h-screen bg-ds-bg">
 
-        {/* Mobile: horizontal tabs */}
+        {/* Mobile: horizontal swipe hint */}
         <div className="lg:hidden bg-ds-bg border-b border-ds-border">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
-              {features.map((feature, i) => (
-                <button
-                  key={feature.id}
-                  onClick={() => setActive(i)}
-                  className={cn(
-                    "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0",
-                    active === i
-                      ? "bg-primary text-white shadow-primary-glow"
-                      : "text-ds-text-secondary hover:text-ds-text-primary hover:bg-ds-bg-tertiary"
-                  )}
-                >
-                  {feature.label}
-                </button>
-              ))}
+          <div className="max-w-7xl mx-auto px-4 py-3">
+            <p className="text-xs font-semibold text-primary uppercase tracking-widest">
+              Deslize para o lado
+            </p>
+            <div className="mt-2 flex items-center justify-between gap-4">
+              <span className="text-sm font-bold text-ds-text-primary">
+                {features[active].label}
+              </span>
+              <div className="flex items-center gap-1.5" aria-hidden="true">
+                {features.map((feature, i) => (
+                  <span
+                    key={feature.id}
+                    className={cn(
+                      "h-1.5 rounded-full transition-all duration-200",
+                      active === i ? "w-5 bg-primary" : "w-1.5 bg-ds-border-strong"
+                    )}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -89,17 +103,26 @@ export default function FuncionalidadesPage() {
 
         {/* Mobile content */}
         <div className="lg:hidden">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={features[active].id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ActiveComponent />
-            </motion.div>
-          </AnimatePresence>
+          <div
+            ref={mobileScrollerRef}
+            onScroll={handleMobileScroll}
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide"
+            aria-label="Funcionalidades do CardTroca"
+          >
+            {features.map((feature) => {
+              const FeatureComponent = feature.component;
+
+              return (
+                <section
+                  key={feature.id}
+                  className="min-w-full snap-start"
+                  aria-label={feature.label}
+                >
+                  <FeatureComponent />
+                </section>
+              );
+            })}
+          </div>
         </div>
 
       </main>
