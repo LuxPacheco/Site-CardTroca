@@ -66,7 +66,7 @@ export function Footer() {
               <span className="font-bold text-ds-text-primary text-lg">CardTroca</span>
             </a>
             <p className="text-ds-text-secondary text-sm leading-relaxed max-w-xs">
-              Plataforma para negociações de TCG, preparada neste momento para cartas Pokémon TCG.
+              A plataforma definitiva para colecionadores TCG.
             </p>
             <div className="flex items-center gap-1">
               <span className="inline-flex items-center gap-1.5 text-xs text-ds-text-tertiary">

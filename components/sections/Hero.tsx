@@ -114,9 +114,9 @@ export function Hero() {
               variants={item}
               className="text-lg sm:text-xl text-ds-text-secondary leading-relaxed max-w-lg mb-10"
             >
-              O CardTroca nasce para organizar negociações entre colecionadores de TCG.
-              A base atual está preparada para cartas Pokémon TCG, com catálogo, anúncios,
-              lista de desejos, modo troca, chat e reputação.
+              A plataforma definitiva para colecionadores TCG.
+              Com catálogo, anúncios, lista de desejos, modo troca, chat e reputação —
+              preparada neste momento para cartas Pokémon TCG.
             </motion.p>
 
             <motion.div variants={item} className="inline-flex flex-col gap-4">

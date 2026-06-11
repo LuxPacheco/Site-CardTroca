@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "CardTroca — Troque, compre e anuncie cartas TCG",
   description:
-    "O CardTroca organiza negociações entre colecionadores de TCG, com busca por localização, anúncios, lista de desejos, modo troca e chat. A base atual está preparada para cartas Pokémon TCG.",
+    "A plataforma definitiva para colecionadores TCG. Busca por localização, anúncios, lista de desejos, modo troca e chat. Preparada neste momento para cartas Pokémon TCG.",
   keywords: [
     "troca de cartas",
     "cartas TCG",

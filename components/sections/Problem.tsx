@@ -83,14 +83,16 @@ export function Problem() {
             <FadeUp key={point.title} delay={i * 0.1}>
               <GlassCard
                 variant="elevated"
-                padding="lg"
+                padding="md"
                 rounded="xl"
                 className="h-full group hover:shadow-elevation-3 transition-shadow duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-500 mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {point.icon}
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-9 h-9 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-500 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    {point.icon}
+                  </div>
+                  <h3 className="font-bold text-ds-text-primary">{point.title}</h3>
                 </div>
-                <h3 className="font-bold text-ds-text-primary mb-2">{point.title}</h3>
                 <p className="text-sm text-ds-text-secondary leading-relaxed">
                   {point.description}
                 </p>

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { Shield, Star, MapPin, Users, CheckCircle, AlertTriangle } from "lucide-react";
+import { Shield, Star, MapPin, Users, CheckCircle, AlertTriangle, ArrowRight } from "lucide-react";
 
 const trustFeatures = [
   { icon: <Users className="w-5 h-5" />, title: "Perfis com reputação", desc: "Veja avaliações e informações públicas antes de negociar." },
@@ -71,7 +71,7 @@ export function Security() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid lg:grid-cols-3 gap-4 mb-10">
           {/* Trust features */}
           {trustFeatures.map((feature, i) => (
             <motion.div
@@ -82,14 +82,16 @@ export function Security() {
             >
               <GlassCard
                 variant="elevated"
-                padding="lg"
+                padding="md"
                 rounded="xl"
                 className="h-full hover:shadow-elevation-3 transition-shadow duration-300"
               >
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-4">
-                  {feature.icon}
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                    {feature.icon}
+                  </div>
+                  <h3 className="font-bold text-ds-text-primary">{feature.title}</h3>
                 </div>
-                <h3 className="font-bold text-ds-text-primary mb-2">{feature.title}</h3>
                 <p className="text-sm text-ds-text-secondary leading-relaxed">{feature.desc}</p>
               </GlassCard>
             </motion.div>
@@ -151,10 +153,9 @@ export function Security() {
           >
             <GlassCard
               variant="elevated"
-              padding="lg"
+              padding="md"
               rounded="2xl"
-              className="h-full border-l-4"
-              style={{ borderLeftColor: "rgba(217,142,4,0.5)" }}
+              className="h-full"
             >
               <div className="flex items-start gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
@@ -194,6 +195,22 @@ export function Security() {
             </GlassCard>
           </motion.div>
         </div>
+
+        {/* CTA */}
+        <motion.div
+          className="mt-10 text-center"
+          initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <a
+            href="/funcionalidades"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-semibold text-sm shadow-primary-glow hover:opacity-90 transition-opacity duration-200"
+          >
+            Conheça as funcionalidades
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
