@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   publisher: "CardTroca",
   robots: { index: true, follow: true },
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/splash_logo.png",
+    apple: "/splash_logo.png",
   },
   openGraph: {
     type: "website",
@@ -38,12 +38,21 @@ export const metadata: Metadata = {
     description:
       "Negociações de TCG com localização, anúncios, lista de desejos, modo troca e chat.",
     siteName: "CardTroca",
+    images: [
+      {
+        url: "https://cardtroca.app/splash_logo.png",
+        width: 1024,
+        height: 1024,
+        alt: "CardTroca",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "CardTroca — Troque, compre e anuncie cartas TCG",
     description:
       "Negociações de TCG com localização, anúncios, lista de desejos, modo troca e chat.",
+    images: ["https://cardtroca.app/splash_logo.png"],
   },
 };
 
