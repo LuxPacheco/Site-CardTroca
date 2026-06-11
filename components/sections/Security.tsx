@@ -153,7 +153,7 @@ export function Security() {
               variant="elevated"
               padding="lg"
               rounded="2xl"
-              className="shadow-elevation-2 h-full border-l-4"
+              className="h-full border-l-4"
               style={{ borderLeftColor: "rgba(217,142,4,0.5)" }}
             >
               <div className="flex items-start gap-3 mb-6">

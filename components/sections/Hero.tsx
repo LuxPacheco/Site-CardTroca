@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { TcgCard } from "@/components/TcgCard";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown, Download, Sparkles } from "lucide-react";
 import { AppStoreBadgeButton } from "@/components/AppStoreBadgeButton";
 
 function HeroAppScreen() {
@@ -118,12 +119,19 @@ export function Hero() {
               lista de desejos, modo troca, chat e reputação.
             </motion.p>
 
-            <motion.div
-              variants={item}
-              className="flex flex-col sm:flex-row gap-4 flex-wrap"
-            >
-              <AppStoreBadgeButton store="apple" />
-              <AppStoreBadgeButton store="google" />
+            <motion.div variants={item} className="flex flex-col gap-4">
+              <Button
+                variant="primary"
+                size="lg"
+                icon={<Download className="w-5 h-5" />}
+                disabled
+              >
+                Faça o Download do App
+              </Button>
+              <div className="flex flex-row gap-3 flex-wrap">
+                <AppStoreBadgeButton store="apple" />
+                <AppStoreBadgeButton store="google" />
+              </div>
             </motion.div>
 
             {/* Social proof */}

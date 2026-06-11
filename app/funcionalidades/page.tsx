@@ -24,9 +24,11 @@ export default function FuncionalidadesPage() {
   return (
     <>
       <Navigation />
-      <main id="main-content" className="pt-16 lg:pt-18">
-        <div className="bg-ds-bg border-b border-ds-border sticky top-16 lg:top-18 z-40">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main id="main-content" className="pt-16 lg:pt-18 min-h-screen bg-ds-bg">
+
+        {/* Mobile: horizontal tabs */}
+        <div className="lg:hidden bg-ds-bg border-b border-ds-border">
+          <div className="max-w-7xl mx-auto px-4">
             <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
               {features.map((feature, i) => (
                 <button
@@ -46,9 +48,44 @@ export default function FuncionalidadesPage() {
           </div>
         </div>
 
-        <div key={active}>
+        {/* Desktop: sidebar + content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          <div className="flex gap-8 items-start">
+
+            {/* Vertical sidebar — desktop only */}
+            <aside className="hidden lg:flex flex-col gap-2 w-56 flex-shrink-0 sticky top-28">
+              <p className="text-xs font-semibold text-ds-text-tertiary uppercase tracking-widest mb-2 px-3">
+                Funcionalidades
+              </p>
+              {features.map((feature, i) => (
+                <button
+                  key={feature.id}
+                  onClick={() => setActive(i)}
+                  className={cn(
+                    "w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
+                    active === i
+                      ? "bg-primary text-white shadow-primary-glow"
+                      : "text-ds-text-secondary hover:text-ds-text-primary hover:bg-ds-bg-tertiary"
+                  )}
+                >
+                  {feature.label}
+                </button>
+              ))}
+            </aside>
+
+            {/* Feature content */}
+            <div key={active} className="flex-1 min-w-0">
+              {features[active].component}
+            </div>
+
+          </div>
+        </div>
+
+        {/* Mobile content */}
+        <div key={`mobile-${active}`} className="lg:hidden">
           {features[active].component}
         </div>
+
       </main>
       <Footer />
     </>
