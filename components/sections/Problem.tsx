@@ -66,9 +66,6 @@ export function Problem() {
         {/* Header */}
         <FadeUp>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
-              O problema
-            </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-ds-text-primary leading-tight mb-6">
               Encontrar a carta certa{" "}
               <span className="text-gradient-primary">nem sempre é simples.</span>

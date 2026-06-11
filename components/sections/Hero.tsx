@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { AppDownloadButton } from "@/components/AppDownloadButton";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { TcgCard } from "@/components/TcgCard";
 import { ArrowDown, Sparkles } from "lucide-react";
+import { AppStoreBadgeButton } from "@/components/AppStoreBadgeButton";
 
 function HeroAppScreen() {
   return (
@@ -121,23 +120,10 @@ export function Hero() {
 
             <motion.div
               variants={item}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 flex-wrap"
             >
-              <AppDownloadButton
-                variant="primary"
-                size="lg"
-              />
-              <Button
-                variant="secondary"
-                size="lg"
-                icon={<ArrowDown className="w-5 h-5" />}
-                iconPosition="right"
-                onClick={() => {
-                  document.querySelector("#funcionalidades")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Conhecer funcionalidades
-              </Button>
+              <AppStoreBadgeButton store="apple" />
+              <AppStoreBadgeButton store="google" />
             </motion.div>
 
             {/* Social proof */}

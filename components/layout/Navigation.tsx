@@ -13,10 +13,8 @@ import {
 } from "lucide-react";
 
 const navLinks = [
-  { href: "#funcionalidades", label: "Funcionalidades" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#match", label: "Match" },
-  { href: "#planos", label: "Planos" },
+  { href: "/", label: "Home" },
+  { href: "/funcionalidades", label: "Funcionalidades" },
 ];
 
 export function Navigation() {

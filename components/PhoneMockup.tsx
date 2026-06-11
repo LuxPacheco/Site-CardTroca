@@ -11,9 +11,9 @@ interface PhoneMockupProps {
 }
 
 const sizes = {
-  sm: "w-[200px]",
-  md: "w-[260px]",
-  lg: "w-[300px]",
+  sm: "w-[160px] sm:w-[200px]",
+  md: "w-[200px] sm:w-[260px]",
+  lg: "w-[220px] sm:w-[300px]",
 };
 
 export const PhoneMockup = forwardRef<HTMLDivElement, PhoneMockupProps>(
