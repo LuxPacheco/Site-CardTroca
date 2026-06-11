@@ -8,49 +8,49 @@ export const metadata: Metadata = {
 
 const sections = [
   {
-    title: "O que e o CardTroca?",
+    title: "O que é o CardTroca?",
     content:
-      "O CardTroca e um app para colecionadores de TCG anunciarem, comprarem, venderem e trocarem cartas entre si. Voce cadastra sua biblioteca, encontra colecionadores proximos e negocia diretamente pelo chat. A base atual esta preparada para cartas Pokemon TCG.",
+      "O CardTroca é um app para colecionadores de TCG anunciarem, comprarem, venderem e trocarem cartas entre si. Você cadastra sua biblioteca, encontra colecionadores próximos e negocia diretamente pelo chat. A base atual está preparada para cartas Pokémon TCG.",
   },
   {
-    title: "Creditos e Pro",
+    title: "Créditos e Pro",
     content:
-      "No modo Creditos, algumas acoes consomem creditos comprados em pacotes ou obtidos por recompensas. Os creditos nao expiram. No Pro, chats, matches, anuncios e destaques ficam liberados conforme as regras do plano ativo.",
+      "No modo Créditos, algumas ações consomem créditos comprados em pacotes ou obtidos por recompensas. Os créditos não expiram. No Pro, chats, matches, anúncios e destaques ficam liberados conforme as regras do plano ativo.",
   },
   {
     title: "Busca de cartas e Lista de Desejos",
     content:
-      "A busca possui catalogo e cartas a venda. No catalogo, pesquise pelo nome da carta ou codigo. Em cartas a venda, use filtros de distancia, condicao, preco, avaliacao e recentes. A Lista de Desejos permite salvar cartas que voce procura e usar essas preferencias no app.",
+      "A busca possui catálogo e cartas à venda. No catálogo, pesquise pelo nome da carta ou código. Em cartas à venda, use filtros de distância, condição, preço, avaliação e recentes. A Lista de Desejos permite salvar cartas que você procura e usar essas preferências no app.",
   },
   {
     title: "Adicionar e anunciar cartas",
     content:
-      "Para adicionar uma carta, informe o codigo, selecione o resultado correto e preencha idioma, condicao, disponibilidade, preco, observacoes e dados de graduacao quando houver. Ao criar anuncio, podem ser consumidos creditos, incluindo creditos extras caso voce escolha destaque.",
+      "Para adicionar uma carta, informe o código, selecione o resultado correto e preencha idioma, condição, disponibilidade, preço, observações e dados de graduação quando houver. Ao criar anúncio, podem ser consumidos créditos, incluindo créditos extras caso você escolha destaque.",
   },
   {
     title: "Modo Troca",
     content:
-      "No modo troca, escolha o que voce quer receber, selecione uma carta sua para oferecer e defina a distancia maxima. Depois, veja ofertas compativeis e sinalize interesse. Quando dois usuarios demonstram interesse, acontece o match e o chat pode ser aberto para negociacao.",
+      "No modo troca, escolha o que você quer receber, selecione uma carta sua para oferecer e defina a distância máxima. Depois, veja ofertas compatíveis e sinalize interesse. Quando dois usuários demonstram interesse, acontece o match e o chat pode ser aberto para negociação.",
   },
   {
-    title: "Destaques e cartas proximas",
+    title: "Destaques e cartas próximas",
     content:
-      "A tela inicial mostra destaques e cartas proximas de voce. As cartas proximas usam sua localizacao aproximada ou cidade cadastrada. Os destaques ajudam anuncios a aparecerem com mais visibilidade nas areas certas do app.",
+      "A tela inicial mostra destaques e cartas próximas de você. As cartas próximas usam sua localização aproximada ou cidade cadastrada. Os destaques ajudam anúncios a aparecerem com mais visibilidade nas áreas certas do app.",
   },
   {
-    title: "Sistema de avaliacao",
+    title: "Sistema de avaliação",
     content:
-      "Ao encerrar uma negociacao, o usuario pode indicar se houve negocio ou nao. Com negocio, a contagem de trocas ou vendas e atualizada no perfil e uma avaliacao pode ser registrada. Chats encerrados ficam arquivados na lista de conversas.",
+      "Ao encerrar uma negociação, o usuário pode indicar se houve negócio ou não. Com negócio, a contagem de trocas ou vendas é atualizada no perfil e uma avaliação pode ser registrada. Chats encerrados ficam arquivados na lista de conversas.",
   },
   {
-    title: "Seguranca em encontros",
+    title: "Segurança em encontros",
     content:
-      "Ao combinar uma troca ou venda presencial, prefira locais publicos, movimentados e seguros. Confira a carta, estado, idioma, preco e reputacao do outro usuario antes de concluir a negociacao.",
+      "Ao combinar uma troca ou venda presencial, prefira locais públicos, movimentados e seguros. Confira a carta, estado, idioma, preço e reputação do outro usuário antes de concluir a negociação.",
   },
   {
     title: "Suporte",
     content:
-      "Para suporte, privacidade ou duvidas sobre a conta, envie uma mensagem para contato@cardtroca.com.",
+      "Para suporte, privacidade ou dúvidas sobre a conta, envie uma mensagem para contato@cardtroca.com.",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function HelpPage() {
     <LegalPage
       eyebrow="Ajuda"
       title="Central de Ajuda"
-      intro="Perguntas frequentes e manual resumido das principais areas do CardTroca."
+      intro="Perguntas frequentes e manual resumido das principais áreas do CardTroca."
       sections={sections}
     />
   );

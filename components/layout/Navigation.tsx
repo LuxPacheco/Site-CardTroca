@@ -17,6 +17,12 @@ const navLinks = [
   { href: "/funcionalidades", label: "Funcionalidades" },
 ];
 
+const supportLinks = [
+  { href: "/central-de-ajuda", label: "Central de Ajuda" },
+  { href: "/politica-de-privacidade", label: "Política de Privacidade" },
+  { href: "/termos-de-uso", label: "Termos de Uso" },
+];
+
 export function Navigation() {
   const { resolvedTheme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
@@ -178,6 +184,26 @@ export function Navigation() {
                   </li>
                 ))}
               </ul>
+              {/* Suporte submenu */}
+              <div className="mt-4 pt-4 border-t border-ds-border">
+                <p className="px-4 py-1 text-xs font-semibold text-ds-text-tertiary uppercase tracking-wider mb-1">
+                  Suporte
+                </p>
+                <ul className="space-y-1" role="list">
+                  {supportLinks.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        className="block px-4 py-2.5 rounded-xl text-sm font-medium text-ds-text-secondary hover:text-ds-text-primary hover:bg-ds-bg-tertiary transition-all duration-200"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <div className="mt-6 pt-6 border-t border-ds-border">
                 <AppDownloadButton variant="primary" size="md" fullWidth />
               </div>

@@ -8,34 +8,34 @@ export const metadata: Metadata = {
 
 const sections = [
   {
-    title: "1. Aceitacao dos Termos",
+    title: "1. Aceitação dos Termos",
     content:
-      "Ao usar o CardTroca, voce concorda com estes Termos de Uso. Leia-os atentamente antes de criar uma conta, anunciar cartas, comprar, vender, trocar ou conversar com outros usuarios.",
+      "Ao usar o CardTroca, você concorda com estes Termos de Uso. Leia-os atentamente antes de criar uma conta, anunciar cartas, comprar, vender, trocar ou conversar com outros usuários.",
   },
   {
-    title: "2. Servico",
+    title: "2. Serviço",
     content:
-      "O CardTroca e uma plataforma de marketplace para compra, venda e troca de cartas TCG entre usuarios. A base atual esta preparada para cartas Pokemon TCG. O app organiza anuncios, busca, lista de desejos, modo troca, chats e reputacao, mas nao e parte das negociacoes, produtos ou encontros entre usuarios.",
+      "O CardTroca é uma plataforma de marketplace para compra, venda e troca de cartas TCG entre usuários. A base atual está preparada para cartas Pokémon TCG. O app organiza anúncios, busca, lista de desejos, modo troca, chats e reputação, mas não é parte das negociações, produtos ou encontros entre usuários.",
   },
   {
-    title: "3. Responsabilidade do usuario",
+    title: "3. Responsabilidade do usuário",
     content:
-      "Voce e responsavel pela veracidade dos dados cadastrados, pela seguranca da sua conta, pelas condutas realizadas durante encontros e pelas negociacoes feitas pelo app. Antes de concluir qualquer troca ou venda, confira a carta, a condicao, o idioma, o preco e as informacoes do outro usuario.",
+      "Você é responsável pela veracidade dos dados cadastrados, pela segurança da sua conta, pelas condutas realizadas durante encontros e pelas negociações feitas pelo app. Antes de concluir qualquer troca ou venda, confira a carta, a condição, o idioma, o preço e as informações do outro usuário.",
   },
   {
-    title: "4. Creditos e pagamentos",
+    title: "4. Créditos e pagamentos",
     content:
-      "Creditos podem ser usados para acoes especificas, como criar anuncios, abrir chats e destacar cartas. Creditos adquiridos nao sao reembolsaveis apos consumo. Assinaturas Pro sao renovadas automaticamente ate cancelamento pela loja de aplicativos correspondente.",
+      "Créditos podem ser usados para ações específicas, como criar anúncios, abrir chats e destacar cartas. Créditos adquiridos não são reembolsáveis após consumo. Assinaturas Pro são renovadas automaticamente até cancelamento pela loja de aplicativos correspondente.",
   },
   {
-    title: "5. Seguranca",
+    title: "5. Segurança",
     content:
-      "O CardTroca recomenda fortemente que encontros presenciais sejam realizados em locais publicos e seguros. O app nao se responsabiliza por incidentes ocorridos durante encontros ou negociacoes realizadas fora da plataforma.",
+      "O CardTroca recomenda fortemente que encontros presenciais sejam realizados em locais públicos e seguros. O app não se responsabiliza por incidentes ocorridos durante encontros ou negociações realizadas fora da plataforma.",
   },
   {
-    title: "6. Moderacao",
+    title: "6. Moderação",
     content:
-      "Reservamos o direito de suspender contas que violem estes termos, pratiquem fraudes, publiquem informacoes falsas, tenham comportamento abusivo ou coloquem outros usuarios em risco.",
+      "Reservamos o direito de suspender contas que violem estes termos, pratiquem fraudes, publiquem informações falsas, tenham comportamento abusivo ou coloquem outros usuários em risco.",
   },
   {
     title: "7. Suporte",
