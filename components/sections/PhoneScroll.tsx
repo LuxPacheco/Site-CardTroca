@@ -145,17 +145,17 @@ function TextRow({ screenIndex, idx, title, subtitle, icon }: TextRowProps) {
       style={{ opacity, y }}
       className="absolute inset-0 flex items-start gap-4 p-3 lg:p-5 rounded-2xl"
     >
-      <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+      <div className="w-11 h-11 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
         {icon}
       </div>
       <div>
-        <div className="flex items-center gap-2 mb-1 lg:mb-2">
-          <span className="text-xs font-bold text-primary/70 uppercase tracking-wider">
+        <div className="flex items-center gap-2 mb-2 lg:mb-3">
+          <span className="text-sm lg:text-base font-bold text-primary/70 uppercase tracking-wider">
             0{idx + 1}
           </span>
-          <h3 className="text-sm lg:text-xl font-bold text-ds-text-primary">{title}</h3>
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-ds-text-primary leading-tight">{title}</h3>
         </div>
-        <p className="text-xs lg:text-base text-ds-text-secondary leading-relaxed">{subtitle}</p>
+        <p className="text-sm sm:text-base lg:text-lg text-ds-text-secondary leading-relaxed">{subtitle}</p>
       </div>
     </motion.div>
   );
@@ -311,7 +311,7 @@ export function PhoneScroll() {
             {/* ── Text column ── */}
             <div className="flex-1 min-w-0">
               {/* Stacked text — only active item visible */}
-              <div className="relative h-52 lg:h-56">
+              <div className="relative h-64 lg:h-72">
                 {screens.map((screen, idx) => (
                   <TextRow
                     key={screen.id}
