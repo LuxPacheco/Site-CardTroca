@@ -51,7 +51,7 @@ export default function FuncionalidadesPage() {
         </div>
 
         {/* Desktop: sidebar + content */}
-        <div className="hidden lg:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="hidden lg:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
           <div className="flex gap-8 items-start">
             <aside className="flex flex-col gap-2 w-56 flex-shrink-0 sticky top-28">
               <p className="text-xs font-semibold text-ds-text-tertiary uppercase tracking-widest mb-2 px-3">

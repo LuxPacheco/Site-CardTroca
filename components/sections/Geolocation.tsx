@@ -125,7 +125,7 @@ export function Geolocation() {
     <section
       id="geolocalizacao"
       aria-label="Geolocalização"
-      className="section-padding bg-ds-bg-secondary relative overflow-hidden"
+      className="py-6 lg:py-10 relative overflow-hidden"
     >
       <div
         className="absolute inset-0 pointer-events-none"

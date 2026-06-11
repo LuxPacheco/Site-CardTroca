@@ -270,18 +270,18 @@ export function PhoneScroll() {
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-8 lg:mb-0 lg:absolute lg:top-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-full px-4 pointer-events-none">
+          <div className="text-center mb-3 lg:mb-0 lg:absolute lg:top-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-full px-4 pointer-events-none">
             <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-1">
               Como funciona
             </p>
-            <h2 className="text-2xl sm:text-3xl font-black text-ds-text-primary">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-ds-text-primary">
               Uma experiência de TCG começando por Pokémon TCG
             </h2>
           </div>
 
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 lg:pt-24">
+          <div className="flex flex-row items-center gap-4 lg:gap-16 lg:pt-24">
             {/* ── Phone column ── */}
-            <div className="flex-shrink-0 flex justify-center lg:justify-end w-full lg:w-1/2">
+            <div className="flex-shrink-0 flex justify-center lg:justify-end">
               <motion.div
                 style={{
                   rotateY,
@@ -309,7 +309,7 @@ export function PhoneScroll() {
             </div>
 
             {/* ── Text column ── */}
-            <div className="w-full lg:w-1/2">
+            <div className="flex-1 min-w-0">
               <div className="space-y-2">
                 {screens.map((screen, idx) => (
                   <TextRow

@@ -27,7 +27,7 @@ export function Wishlist() {
     <section
       id="lista-de-desejos"
       aria-label="Lista de desejos"
-      className="section-padding bg-ds-bg relative overflow-hidden"
+      className="py-6 lg:py-10 relative overflow-hidden"
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -71,7 +71,8 @@ export function Wishlist() {
               destaques e o modo troca.
             </p>
 
-            <div className="space-y-6">
+            {/* Benefits — desktop only */}
+            <div className="hidden lg:block space-y-6">
               {benefits.map((benefit) => (
                 <div key={benefit.title} className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
@@ -85,13 +86,26 @@ export function Wishlist() {
               ))}
             </div>
 
-            <div className="mt-10 p-4 rounded-2xl bg-primary/8 border border-primary/15">
+            <div className="hidden lg:block mt-10 p-4 rounded-2xl bg-primary/8 border border-primary/15">
               <p className="text-sm text-primary font-medium flex items-center gap-2">
                 <Sparkles className="w-4 h-4 flex-shrink-0" />
                 Quanto melhor sua lista, mais fácil configurar uma troca relevante.
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Benefits — mobile 2-col grid */}
+        <div className="lg:hidden mt-4 grid grid-cols-2 gap-3">
+          {benefits.map((benefit) => (
+            <div key={benefit.title} className="p-3 rounded-xl bg-ds-surface border border-ds-border">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-2">
+                {benefit.icon}
+              </div>
+              <p className="font-bold text-ds-text-primary text-xs mb-1">{benefit.title}</p>
+              <p className="text-xs text-ds-text-secondary leading-relaxed">{benefit.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -20,7 +20,7 @@ export function Search() {
     <section
       id="busca"
       aria-label="Busca inteligente"
-      className="section-padding bg-ds-bg-secondary relative overflow-hidden"
+      className="py-6 lg:py-10 relative overflow-hidden"
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -67,7 +67,8 @@ export function Search() {
               reputação do usuário e ordenação por resultados recentes.
             </p>
 
-            <div className="space-y-3">
+            {/* Filters — desktop only */}
+            <div className="hidden lg:block space-y-3">
               {filters.map((filter, i) => (
                 <div
                   key={filter.label}
@@ -94,6 +95,30 @@ export function Search() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Filters — mobile 2-col grid */}
+        <div className="lg:hidden mt-4 grid grid-cols-2 gap-3">
+          {filters.map((filter, i) => (
+            <div
+              key={filter.label}
+              className="p-3 rounded-xl bg-ds-surface border border-ds-border flex items-center gap-2 cursor-pointer"
+              onClick={() => setActiveFilter(i)}
+            >
+              <div
+                className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                  activeFilter === i
+                    ? "bg-primary text-white shadow-primary-glow"
+                    : "bg-ds-bg-tertiary text-ds-text-tertiary"
+                }`}
+              >
+                {filter.icon}
+              </div>
+              <span className={`text-xs font-medium ${activeFilter === i ? "text-primary" : "text-ds-text-secondary"}`}>
+                {filter.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

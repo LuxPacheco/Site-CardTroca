@@ -60,7 +60,7 @@ export function Navigation() {
           <div className="flex items-center justify-between h-16 lg:h-18">
             {/* Logo */}
             <a
-              href="#"
+              href="/"
               className="flex items-center gap-2.5 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
               aria-label="CardTroca — Início"
             >
@@ -68,7 +68,7 @@ export function Navigation() {
                 className="w-9 h-9 rounded-xl flex items-center justify-center shadow-primary-glow flex-shrink-0 overflow-hidden bg-white"
               >
                 <Image
-                  src="/logo.png"
+                  src="/splash_logo.png"
                   alt=""
                   width={36}
                   height={36}

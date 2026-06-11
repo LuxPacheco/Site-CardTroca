@@ -19,7 +19,7 @@ export function MatchSystem() {
     <section
       id="match"
       aria-label="Sistema de Match"
-      className="section-padding bg-ds-bg relative overflow-hidden"
+      className="py-6 lg:py-10 relative overflow-hidden"
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -68,8 +68,8 @@ export function MatchSystem() {
               transforma uma busca dispersa em um fluxo direto: passar ou demonstrar interesse.
             </p>
 
-            {/* Steps */}
-            <div className="space-y-4">
+            {/* Steps — desktop only */}
+            <div className="hidden lg:block space-y-4">
               {steps.map((step) => (
                 <div key={step.title} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl glass border-gradient flex items-center justify-center text-lg flex-shrink-0">
@@ -83,8 +83,8 @@ export function MatchSystem() {
               ))}
             </div>
 
-            {/* Benefits row */}
-            <div className="flex flex-wrap gap-2 mt-8">
+            {/* Benefits row — desktop only */}
+            <div className="hidden lg:flex flex-wrap gap-2 mt-8">
               {["Menos buscas manuais", "Lista de desejos", "Raio configurável", "Chat após match"].map((b) => (
                 <span
                   key={b}
@@ -96,6 +96,17 @@ export function MatchSystem() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Steps — mobile 2-col grid */}
+        <div className="lg:hidden mt-4 grid grid-cols-2 gap-3">
+          {steps.map((step) => (
+            <div key={step.title} className="p-3 rounded-xl bg-ds-surface border border-ds-border">
+              <div className="text-xl mb-2">{step.icon}</div>
+              <p className="font-bold text-ds-text-primary text-xs mb-1">{step.title}</p>
+              <p className="text-xs text-ds-text-secondary leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-8 lg:mt-24 flex flex-row items-start gap-3 lg:gap-16">
