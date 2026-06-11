@@ -57,9 +57,9 @@ export function AppDownloadButton({
       fullWidth={fullWidth}
       icon={<Download className="w-4 h-4" />}
       className={className}
-      onClick={openAppStore}
+      onClick={() => {}}
     >
-      Baixar App
+      Em breve
     </Button>
   );
 }
