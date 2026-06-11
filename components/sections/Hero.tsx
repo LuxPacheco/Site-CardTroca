@@ -49,6 +49,12 @@ export function Hero() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
   };
 
+  // h1 é o LCP element — nunca começa com opacity:0 para não atrasar o LCP
+  const itemLcp = {
+    hidden: { y: 24 },
+    visible: { y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  };
+
   return (
     <section
       id="hero"
@@ -100,7 +106,7 @@ export function Hero() {
             </motion.div>
 
             <motion.h1
-              variants={item}
+              variants={itemLcp}
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.05] mb-6"
             >
               Troque, compre{" "}
