@@ -70,7 +70,7 @@ export function Navigation() {
               className="flex items-center gap-2.5 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
               aria-label="CardTroca — Início"
             >
-              <div className="h-12 w-12 lg:h-14 lg:w-14 overflow-hidden flex-shrink-0">
+              <div className="h-[58px] w-[58px] overflow-hidden flex-shrink-0">
                 <Image
                   src="/splash_logo.png"
                   alt=""
@@ -112,7 +112,7 @@ export function Navigation() {
               <button
                 onClick={toggleTheme}
                 className={cn(
-                  "w-9 h-9 rounded-full flex items-center justify-center",
+                  "w-10 h-10 rounded-full flex items-center justify-center",
                   "text-ds-text-secondary hover:text-ds-text-primary",
                   "hover:bg-ds-bg-tertiary",
                   "transition-all duration-200",
@@ -121,9 +121,9 @@ export function Navigation() {
                 aria-label={resolvedTheme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
               >
                 {resolvedTheme === "dark" ? (
-                  <Sun className="w-4 h-4" />
+                  <Sun className="w-[22px] h-[22px]" />
                 ) : (
-                  <Moon className="w-4 h-4" />
+                  <Moon className="w-[22px] h-[22px]" />
                 )}
               </button>
 
@@ -138,7 +138,7 @@ export function Navigation() {
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(
-                  "w-9 h-9 rounded-full flex items-center justify-center lg:hidden",
+                  "w-10 h-10 rounded-full flex items-center justify-center lg:hidden",
                   "text-ds-text-secondary hover:text-ds-text-primary",
                   "hover:bg-ds-bg-tertiary",
                   "transition-all duration-200",
@@ -147,7 +147,7 @@ export function Navigation() {
                 aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
                 aria-expanded={mobileOpen}
               >
-                {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+                {mobileOpen ? <X className="w-[22px] h-[22px]" /> : <Menu className="w-[22px] h-[22px]" />}
               </button>
             </div>
           </div>
