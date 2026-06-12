@@ -38,9 +38,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     const root = document.documentElement;
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const hour = new Date().getHours();
+    const nightTime = hour >= 18 || hour < 6;
 
     let resolved: "light" | "dark" = "light";
-    if (theme === "dark" || (theme === "system" && systemDark)) {
+    if (theme === "dark" || (theme === "system" && (nightTime || systemDark))) {
       resolved = "dark";
     }
 

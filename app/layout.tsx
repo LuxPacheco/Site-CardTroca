@@ -80,8 +80,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `(function(){try{
               var t=localStorage.getItem('cardtroca-theme');
+              var h=new Date().getHours();
+              var night=h>=18||h<6;
               var d=window.matchMedia('(prefers-color-scheme: dark)').matches;
-              if(t==='dark'||(t!=='light'&&d)){document.documentElement.classList.add('dark')}
+              if(t==='dark'||(t!=='light'&&(night||d))){document.documentElement.classList.add('dark')}
               if(new URLSearchParams(location.search).get('preview')==='1'){document.documentElement.classList.add('preview-mode')}
             }catch(e){}})()`,
           }}
