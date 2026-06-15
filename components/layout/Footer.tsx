@@ -103,12 +103,12 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-ds-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-ds-border flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
           <p className="text-xs text-ds-text-tertiary">
             © {new Date().getFullYear()} CardTroca. Todos os direitos reservados.
           </p>
-          <p className="text-xs text-ds-text-tertiary">
-            Feito com cuidado para colecionadores
+          <p className="text-xs text-ds-text-tertiary text-center sm:text-right">
+            Imagens das cartas © The Pokémon Company. Dados fornecidos por TCGdex e Pokémon TCG API.
           </p>
         </div>
       </div>
