@@ -3,13 +3,15 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/components/ThemeProvider";
-import { AppDownloadButton } from "@/components/AppDownloadButton";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import {
   Sun,
   Moon,
   Menu,
   X,
+  FlaskConical,
 } from "lucide-react";
 
 const navLinks = [
@@ -128,11 +130,11 @@ export function Navigation() {
               </button>
 
               {/* CTA */}
-              <AppDownloadButton
-                variant="primary"
-                size="sm"
-                className="hidden sm:inline-flex"
-              />
+              <Link href="/beta" className="hidden sm:inline-flex">
+                <Button variant="primary" size="sm" icon={<FlaskConical className="w-4 h-4" />}>
+                  Participe do Beta
+                </Button>
+              </Link>
 
               {/* Mobile menu toggle */}
               <button
@@ -205,7 +207,11 @@ export function Navigation() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-ds-border">
-                <AppDownloadButton variant="primary" size="md" fullWidth />
+                <Link href="/beta" onClick={() => setMobileOpen(false)}>
+                  <Button variant="primary" size="md" fullWidth icon={<FlaskConical className="w-4 h-4" />}>
+                    Participe do Beta
+                  </Button>
+                </Link>
               </div>
             </nav>
           </div>

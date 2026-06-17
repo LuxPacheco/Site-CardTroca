@@ -6,8 +6,9 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { TcgCard } from "@/components/TcgCard";
-import { ArrowDown, Download, Sparkles } from "lucide-react";
+import { ArrowDown, Sparkles, FlaskConical } from "lucide-react";
 import { AppStoreBadgeButton } from "@/components/AppStoreBadgeButton";
+import Link from "next/link";
 
 function HeroAppScreen() {
   return (
@@ -126,15 +127,16 @@ export function Hero() {
             </motion.p>
 
             <motion.div variants={item} className="inline-flex flex-col gap-4">
-              <Button
-                variant="primary"
-                size="lg"
-                icon={<Download className="w-5 h-5" />}
-                fullWidth
-                disabled
-              >
-                Faça o Download do App
-              </Button>
+              <Link href="/beta" className="w-full">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  icon={<FlaskConical className="w-5 h-5" />}
+                  fullWidth
+                >
+                  Participe do Beta
+                </Button>
+              </Link>
               <div className="flex flex-row gap-3">
                 <AppStoreBadgeButton store="apple" />
                 <AppStoreBadgeButton store="google" />

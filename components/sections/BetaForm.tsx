@@ -1,0 +1,310 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Smartphone, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Gift, Users, Zap } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+
+type Platform = "ios" | "android" | "";
+type Status = "idle" | "loading" | "success" | "error";
+
+const TOTAL_SPOTS = 50;
+
+export function BetaForm() {
+  const [email, setEmail] = useState("");
+  const [platform, setPlatform] = useState<Platform>("");
+  const [whatsappAgreed, setWhatsappAgreed] = useState(false);
+  const [dataConsent, setDataConsent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || !platform || !whatsappAgreed || !dataConsent) return;
+
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/beta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          platform,
+          whatsapp_agreed: whatsappAgreed,
+          data_consent: dataConsent,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMsg(data.error ?? "Erro ao enviar. Tente novamente.");
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+    } catch {
+      setErrorMsg("Erro de conexão. Verifique sua internet e tente novamente.");
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-md"
+        >
+          <div
+            className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+            style={{ background: "linear-gradient(135deg, var(--color-primary-hover), var(--color-primary))" }}
+          >
+            <CheckCircle2 className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-black text-ds-text-primary mb-3">
+            Você está dentro! 🎉
+          </h1>
+          <p className="text-ds-text-secondary text-lg leading-relaxed mb-6">
+            Sua inscrição foi confirmada. Entraremos em contato com os próximos passos para acesso ao Beta.
+          </p>
+          <div className="bg-ds-surface border border-ds-border rounded-2xl p-5 mb-8 text-left">
+            <div className="flex items-center gap-3 text-primary font-semibold mb-1">
+              <Gift className="w-5 h-5 flex-shrink-0" />
+              Lembrete importante
+            </div>
+            <p className="text-ds-text-secondary text-sm">
+              Se você estiver entre os primeiros <strong className="text-ds-text-primary">50 inscritos</strong>, receberá <strong className="text-ds-text-primary">30 créditos adicionais</strong> automaticamente na sua carteira ao ativar o app.
+            </p>
+          </div>
+          <Link href="/">
+            <Button variant="secondary" icon={<ArrowLeft className="w-4 h-4" />}>
+              Voltar para o início
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <div className="px-4 sm:px-6 pt-6">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-ds-text-secondary hover:text-ds-text-primary transition-colors text-sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Voltar
+        </Link>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-primary text-xs font-semibold uppercase tracking-wide">Acesso Beta</span>
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-3xl sm:text-4xl font-black text-ds-text-primary leading-tight mb-3">
+              Seja um dos primeiros a testar o CardTroca
+            </h1>
+            <p className="text-ds-text-secondary text-base leading-relaxed mb-8">
+              Ajude a moldar o futuro da plataforma, encontre bugs e sugira funcionalidades antes de todo mundo.
+            </p>
+
+            {/* Benefit cards */}
+            <div className="grid grid-cols-3 gap-3 mb-8">
+              {[
+                { icon: Gift, label: "30 créditos", sub: "para os primeiros 50" },
+                { icon: Zap, label: "Acesso antecipado", sub: "antes do lançamento" },
+                { icon: Users, label: "Comunidade", sub: "grupo exclusivo" },
+              ].map(({ icon: Icon, label, sub }) => (
+                <div
+                  key={label}
+                  className="bg-ds-surface border border-ds-border rounded-xl p-3 text-center"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-2">
+                    <Icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <p className="text-ds-text-primary text-xs font-semibold leading-tight">{label}</p>
+                  <p className="text-ds-text-tertiary text-[11px] leading-tight mt-0.5">{sub}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Spots remaining callout */}
+            <div className="bg-accent/10 border border-accent/20 rounded-xl px-4 py-3 flex items-center gap-3 mb-8">
+              <Gift className="w-5 h-5 text-accent flex-shrink-0" />
+              <p className="text-sm text-ds-text-secondary">
+                <strong className="text-ds-text-primary">{TOTAL_SPOTS} vagas com bônus de 30 créditos.</strong>{" "}
+                Inscreva-se agora para garantir o seu.
+              </p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} noValidate className="space-y-5">
+              {/* Email */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-semibold text-ds-text-primary mb-1.5"
+                >
+                  E-mail da loja de apps
+                </label>
+                <p className="text-xs text-ds-text-tertiary mb-2">
+                  Use o mesmo e-mail da App Store ou Google Play para garantirmos o acesso.
+                </p>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="seu@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-ds-surface border border-ds-border text-ds-text-primary placeholder:text-ds-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                />
+              </div>
+
+              {/* Platform */}
+              <div>
+                <label className="block text-sm font-semibold text-ds-text-primary mb-1.5">
+                  Qual dispositivo você usa?
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(["ios", "android"] as const).map((p) => {
+                    const selected = platform === p;
+                    return (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => setPlatform(p)}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
+                          selected
+                            ? "bg-primary/10 border-primary text-primary"
+                            : "bg-ds-surface border-ds-border text-ds-text-secondary hover:border-ds-border-strong"
+                        }`}
+                      >
+                        <Smartphone className="w-4 h-4 flex-shrink-0" />
+                        {p === "ios" ? "iPhone (iOS)" : "Android"}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Checkboxes */}
+              <div className="space-y-3">
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <div className="relative flex-shrink-0 mt-0.5">
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={whatsappAgreed}
+                      onChange={(e) => setWhatsappAgreed(e.target.checked)}
+                      required
+                    />
+                    <div
+                      onClick={() => setWhatsappAgreed((v) => !v)}
+                      className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all cursor-pointer ${
+                        whatsappAgreed
+                          ? "bg-primary border-primary"
+                          : "border-ds-border-strong group-hover:border-primary/60"
+                      }`}
+                    >
+                      {whatsappAgreed && (
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12">
+                          <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <span className="text-sm text-ds-text-secondary leading-relaxed" onClick={() => setWhatsappAgreed((v) => !v)}>
+                    Aceito entrar no grupo do WhatsApp do Beta do CardTroca para receber atualizações e participar da comunidade.
+                  </span>
+                </label>
+
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <div className="relative flex-shrink-0 mt-0.5">
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={dataConsent}
+                      onChange={(e) => setDataConsent(e.target.checked)}
+                      required
+                    />
+                    <div
+                      onClick={() => setDataConsent((v) => !v)}
+                      className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all cursor-pointer ${
+                        dataConsent
+                          ? "bg-primary border-primary"
+                          : "border-ds-border-strong group-hover:border-primary/60"
+                      }`}
+                    >
+                      {dataConsent && (
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12">
+                          <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <span className="text-sm text-ds-text-secondary leading-relaxed" onClick={() => setDataConsent((v) => !v)}>
+                    Concordo em compartilhar meu e-mail e dispositivo com o CardTroca para fins de participação no Beta, conforme a{" "}
+                    <Link href="/politica-de-privacidade" className="text-primary underline underline-offset-2 hover:text-primary/80">
+                      Política de Privacidade
+                    </Link>{" "}
+                    e os{" "}
+                    <Link href="/termos-de-uso" className="text-primary underline underline-offset-2 hover:text-primary/80">
+                      Termos de Uso
+                    </Link>
+                    .
+                  </span>
+                </label>
+              </div>
+
+              {/* Error */}
+              {status === "error" && (
+                <div className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-400 text-sm">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  {errorMsg}
+                </div>
+              )}
+
+              {/* Submit */}
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                fullWidth
+                loading={status === "loading"}
+                disabled={!email || !platform || !whatsappAgreed || !dataConsent || status === "loading"}
+                icon={status === "loading" ? <Loader2 className="w-5 h-5 animate-spin" /> : undefined}
+              >
+                {status === "loading" ? "Enviando..." : "Quero participar do Beta"}
+              </Button>
+
+              <p className="text-center text-xs text-ds-text-tertiary">
+                Sem spam. Você pode cancelar a qualquer momento.
+              </p>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}

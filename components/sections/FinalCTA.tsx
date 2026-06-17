@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { AppStoreBadgeButton } from "@/components/AppStoreBadgeButton";
-import { openAppStore } from "@/components/AppDownloadButton";
-import { Download, UserPlus } from "lucide-react";
+import { FlaskConical, UserPlus } from "lucide-react";
+import Link from "next/link";
 
 export function FinalCTA() {
   const ref = useRef<HTMLDivElement>(null);
@@ -111,15 +111,14 @@ export function FinalCTA() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <button
-              type="button"
-              onClick={openAppStore}
+            <Link
+              href="/beta"
               className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-primary bg-white shadow-elevation-4 hover:shadow-elevation-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
-              aria-label="Baixar o CardTroca"
+              aria-label="Participar do Beta do CardTroca"
             >
-              <Download className="w-5 h-5" />
-              Baixar App
-            </button>
+              <FlaskConical className="w-5 h-5" />
+              Participe do Beta
+            </Link>
             <button
               className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-white bg-white/10 border border-white/20 backdrop-blur-sm hover:bg-white/15 active:scale-[0.98] transition-all duration-200"
               aria-label="Conhecer o CardTroca"
