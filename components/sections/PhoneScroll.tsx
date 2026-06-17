@@ -66,7 +66,7 @@ function TradeSwipeScreen() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/images/troca2.webp"
+        src="/images/swipe.webp"
         alt=""
         fill
         unoptimized
