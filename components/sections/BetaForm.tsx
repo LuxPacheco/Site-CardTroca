@@ -210,60 +210,30 @@ export function BetaForm() {
 
               {/* Checkboxes */}
               <div className="space-y-3">
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <div className="relative flex-shrink-0 mt-0.5">
-                    <input
-                      type="checkbox"
-                      className="sr-only"
-                      checked={whatsappAgreed}
-                      onChange={(e) => setWhatsappAgreed(e.target.checked)}
-                      required
-                    />
-                    <div
-                      onClick={() => setWhatsappAgreed((v) => !v)}
-                      className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all cursor-pointer ${
-                        whatsappAgreed
-                          ? "bg-primary border-primary"
-                          : "border-ds-border-strong group-hover:border-primary/60"
-                      }`}
-                    >
-                      {whatsappAgreed && (
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12">
-                          <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <span className="text-sm text-ds-text-secondary leading-relaxed" onClick={() => setWhatsappAgreed((v) => !v)}>
+                <div className="flex items-start gap-3 group">
+                  <input
+                    id="whatsapp"
+                    type="checkbox"
+                    checked={whatsappAgreed}
+                    onChange={(e) => setWhatsappAgreed(e.target.checked)}
+                    required
+                    className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-md border-2 border-ds-border-strong accent-primary cursor-pointer"
+                  />
+                  <label htmlFor="whatsapp" className="text-sm text-ds-text-secondary leading-relaxed cursor-pointer">
                     Aceito entrar no grupo do WhatsApp do Beta do CardTroca para receber atualizações e participar da comunidade.
-                  </span>
-                </label>
+                  </label>
+                </div>
 
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <div className="relative flex-shrink-0 mt-0.5">
-                    <input
-                      type="checkbox"
-                      className="sr-only"
-                      checked={dataConsent}
-                      onChange={(e) => setDataConsent(e.target.checked)}
-                      required
-                    />
-                    <div
-                      onClick={() => setDataConsent((v) => !v)}
-                      className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all cursor-pointer ${
-                        dataConsent
-                          ? "bg-primary border-primary"
-                          : "border-ds-border-strong group-hover:border-primary/60"
-                      }`}
-                    >
-                      {dataConsent && (
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12">
-                          <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <span className="text-sm text-ds-text-secondary leading-relaxed" onClick={() => setDataConsent((v) => !v)}>
+                <div className="flex items-start gap-3 group">
+                  <input
+                    id="dataconsent"
+                    type="checkbox"
+                    checked={dataConsent}
+                    onChange={(e) => setDataConsent(e.target.checked)}
+                    required
+                    className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-md border-2 border-ds-border-strong accent-primary cursor-pointer"
+                  />
+                  <label htmlFor="dataconsent" className="text-sm text-ds-text-secondary leading-relaxed cursor-pointer">
                     Concordo em compartilhar meu e-mail e dispositivo com o CardTroca para fins de participação no Beta, conforme a{" "}
                     <Link href="/politica-de-privacidade" className="text-primary underline underline-offset-2 hover:text-primary/80">
                       Política de Privacidade
@@ -273,8 +243,8 @@ export function BetaForm() {
                       Termos de Uso
                     </Link>
                     .
-                  </span>
-                </label>
+                  </label>
+                </div>
               </div>
 
               {/* Error */}
