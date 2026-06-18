@@ -4,6 +4,7 @@ import { buildBetaEmail } from "@/lib/betaEmail";
 import nodemailer from "nodemailer";
 
 const VALID_PLATFORMS = ["ios", "android"];
+const MAX_SPOTS = 50;
 
 function createTransporter() {
   return nodemailer.createTransport({
@@ -27,6 +28,18 @@ async function sendConfirmationEmail(email: string) {
   });
 }
 
+export async function GET() {
+  const { count, error } = await supabase
+    .from("beta_signups")
+    .select("*", { count: "exact", head: true });
+
+  if (error) {
+    return NextResponse.json({ error: "Erro ao consultar vagas." }, { status: 500 });
+  }
+
+  return NextResponse.json({ count: count ?? 0, isClosed: (count ?? 0) >= MAX_SPOTS });
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { email, phone, platform, whatsapp_agreed, data_consent } = body;
@@ -42,6 +55,15 @@ export async function POST(req: NextRequest) {
 
   if (!VALID_PLATFORMS.includes(platform)) {
     return NextResponse.json({ error: "Plataforma inválida." }, { status: 400 });
+  }
+
+  // Check if spots are still available
+  const { count: currentCount } = await supabase
+    .from("beta_signups")
+    .select("*", { count: "exact", head: true });
+
+  if ((currentCount ?? 0) >= MAX_SPOTS) {
+    return NextResponse.json({ error: "As vagas do Beta foram preenchidas." }, { status: 409 });
   }
 
   const { error } = await supabase.from("beta_signups").insert({
@@ -60,6 +82,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Erro ao salvar inscrição. Tente novamente." }, { status: 500 });
   }
 
+  // Get position after insert
+  const { count: newCount } = await supabase
+    .from("beta_signups")
+    .select("*", { count: "exact", head: true });
+
+  const position = newCount ?? (currentCount ?? 0) + 1;
+
   try {
     await sendConfirmationEmail(email.toLowerCase().trim());
   } catch (emailError) {
@@ -67,5 +96,5 @@ export async function POST(req: NextRequest) {
     // Não falha a inscrição se o e-mail falhar
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, position });
 }
