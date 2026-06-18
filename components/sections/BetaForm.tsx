@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Smartphone, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Gift, Users, Zap } from "lucide-react";
+import { Smartphone, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Gift, Users, Zap, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 type Platform = "ios" | "android" | "";
@@ -11,8 +11,22 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const TOTAL_SPOTS = 50;
 
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 2) return digits.length ? `(${digits}` : "";
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function isValidPhone(phone: string): boolean {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length >= 10 && digits.length <= 11;
+}
+
 export function BetaForm() {
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [platform, setPlatform] = useState<Platform>("");
   const [whatsappAgreed, setWhatsappAgreed] = useState(false);
   const [dataConsent, setDataConsent] = useState(false);
@@ -32,6 +46,7 @@ export function BetaForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
+          phone,
           platform,
           whatsapp_agreed: whatsappAgreed,
           data_consent: dataConsent,
@@ -181,6 +196,32 @@ export function BetaForm() {
                 />
               </div>
 
+              {/* Phone */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-semibold text-ds-text-primary mb-1.5"
+                >
+                  WhatsApp
+                </label>
+                <p className="text-xs text-ds-text-tertiary mb-2">
+                  Número que receberá o convite para o grupo do Beta.
+                </p>
+                <div className="relative">
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ds-text-tertiary" />
+                  <input
+                    id="phone"
+                    type="tel"
+                    required
+                    autoComplete="tel"
+                    placeholder="(11) 99999-9999"
+                    value={phone}
+                    onChange={(e) => setPhone(formatPhone(e.target.value))}
+                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-ds-surface border border-ds-border text-ds-text-primary placeholder:text-ds-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
+                  />
+                </div>
+              </div>
+
               {/* Platform */}
               <div>
                 <label className="block text-sm font-semibold text-ds-text-primary mb-1.5">
@@ -219,9 +260,14 @@ export function BetaForm() {
                     required
                     className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-md border-2 border-ds-border-strong accent-primary cursor-pointer"
                   />
-                  <label htmlFor="whatsapp" className="text-sm text-ds-text-secondary leading-relaxed cursor-pointer">
-                    Aceito entrar no grupo do WhatsApp do Beta do CardTroca para receber atualizações e participar da comunidade.
-                  </label>
+                  <div>
+                    <label htmlFor="whatsapp" className="text-sm text-ds-text-secondary leading-relaxed cursor-pointer">
+                      Aceito entrar no grupo do WhatsApp do Beta do CardTroca para receber atualizações e participar da comunidade.
+                    </label>
+                    <p className="text-xs text-ds-text-tertiary mt-1">
+                      Você receberá o convite em até 24h após a inscrição.
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex items-start gap-3 group">
@@ -262,7 +308,7 @@ export function BetaForm() {
                 size="lg"
                 fullWidth
                 loading={status === "loading"}
-                disabled={!email || !platform || !whatsappAgreed || !dataConsent || status === "loading"}
+                disabled={!email || !phone || !isValidPhone(phone) || !platform || !whatsappAgreed || !dataConsent || status === "loading"}
                 icon={status === "loading" ? <Loader2 className="w-5 h-5 animate-spin" /> : undefined}
               >
                 {status === "loading" ? "Enviando..." : "Quero participar do Beta"}
