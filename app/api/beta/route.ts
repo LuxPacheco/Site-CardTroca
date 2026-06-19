@@ -104,9 +104,15 @@ export async function POST(req: NextRequest) {
   if (!turnstile_token || typeof turnstile_token !== "string") {
     return NextResponse.json({ error: "Verificação de segurança necessária." }, { status: 400 });
   }
-  const captchaValid = await verifyTurnstile(turnstile_token, ip);
-  if (!captchaValid) {
-    return NextResponse.json({ error: "Falha na verificação de segurança. Tente novamente." }, { status: 400 });
+  try {
+    const captchaValid = await verifyTurnstile(turnstile_token, ip);
+    console.log("[beta] captchaValid:", captchaValid);
+    if (!captchaValid) {
+      return NextResponse.json({ error: "Falha na verificação de segurança. Tente novamente." }, { status: 400 });
+    }
+  } catch (captchaError) {
+    console.error("[beta] Turnstile verify error:", captchaError);
+    return NextResponse.json({ error: "Erro ao verificar segurança. Tente novamente." }, { status: 500 });
   }
 
   // Strict presence and type checks
