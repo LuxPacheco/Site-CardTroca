@@ -70,6 +70,20 @@ export async function GET() {
   return NextResponse.json({ count: count ?? 0, isClosed: (count ?? 0) >= MAX_SPOTS });
 }
 
+async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      secret: process.env.TURNSTILE_SECRET_KEY,
+      response: token,
+      remoteip: ip,
+    }),
+  });
+  const data = await res.json();
+  return data.success === true;
+}
+
 export async function POST(req: NextRequest) {
   // Rate limiting
   const ip = getIp(req);
@@ -81,7 +95,16 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { email, phone, platform, whatsapp_agreed, data_consent } = body;
+  const { email, phone, platform, whatsapp_agreed, data_consent, turnstile_token } = body;
+
+  // Verify Turnstile CAPTCHA
+  if (!turnstile_token || typeof turnstile_token !== "string") {
+    return NextResponse.json({ error: "Verificação de segurança necessária." }, { status: 400 });
+  }
+  const captchaValid = await verifyTurnstile(turnstile_token, ip);
+  if (!captchaValid) {
+    return NextResponse.json({ error: "Falha na verificação de segurança. Tente novamente." }, { status: 400 });
+  }
 
   // Strict presence and type checks
   if (!email || !phone || !platform || whatsapp_agreed !== true || data_consent !== true) {

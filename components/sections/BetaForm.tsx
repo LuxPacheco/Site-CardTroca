@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Smartphone, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Gift, Users, Zap, Phone, Instagram, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 type Platform = "ios" | "android" | "";
 type Status = "idle" | "loading" | "success" | "error";
@@ -36,6 +37,8 @@ export function BetaForm() {
   const [position, setPosition] = useState<number | null>(null);
   const [isClosed, setIsClosed] = useState(false);
   const [signupCount, setSignupCount] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<{ reset: () => void } | null>(null);
 
   useEffect(() => {
     fetch("/api/beta")
@@ -49,7 +52,7 @@ export function BetaForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email || !phone || !isValidPhone(phone) || !platform || !whatsappAgreed || !dataConsent) return;
+    if (!email || !phone || !isValidPhone(phone) || !platform || !whatsappAgreed || !dataConsent || !turnstileToken) return;
 
     setStatus("loading");
     setErrorMsg("");
@@ -64,6 +67,7 @@ export function BetaForm() {
           platform,
           whatsapp_agreed: whatsappAgreed,
           data_consent: dataConsent,
+          turnstile_token: turnstileToken,
         }),
       });
 
@@ -80,6 +84,8 @@ export function BetaForm() {
     } catch {
       setErrorMsg("Erro de conexão. Verifique sua internet e tente novamente.");
       setStatus("error");
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     }
   }
 
@@ -403,6 +409,16 @@ export function BetaForm() {
                 </div>
               )}
 
+              {/* Turnstile */}
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken(null)}
+                onError={() => setTurnstileToken(null)}
+                options={{ theme: "auto" }}
+              />
+
               {/* Submit */}
               <Button
                 type="submit"
@@ -410,7 +426,7 @@ export function BetaForm() {
                 size="lg"
                 fullWidth
                 loading={status === "loading"}
-                disabled={!email || !phone || !isValidPhone(phone) || !platform || !whatsappAgreed || !dataConsent || status === "loading"}
+                disabled={!email || !phone || !isValidPhone(phone) || !platform || !whatsappAgreed || !dataConsent || !turnstileToken || status === "loading"}
                 icon={status === "loading" ? <Loader2 className="w-5 h-5 animate-spin" /> : undefined}
               >
                 {status === "loading" ? "Enviando..." : "Quero participar do Beta"}
