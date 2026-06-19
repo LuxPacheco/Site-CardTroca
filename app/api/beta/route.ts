@@ -81,6 +81,7 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
     }),
   });
   const data = await res.json();
+  console.log("[beta] turnstile response:", JSON.stringify(data));
   return data.success === true;
 }
 
