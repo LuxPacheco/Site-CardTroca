@@ -1,4 +1,14 @@
-export function buildBetaEmail(email: string): string {
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+export function buildBetaEmail(rawEmail: string): string {
+  const email = escapeHtml(rawEmail);
   const logoUrl = "https://cardtroca.com/logo.png";
 
   return `<!DOCTYPE html>

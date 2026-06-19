@@ -6,6 +6,36 @@ import nodemailer from "nodemailer";
 const VALID_PLATFORMS = ["ios", "android"];
 const MAX_SPOTS = 50;
 
+// Simple in-memory rate limiter (resets on cold start — sufficient for this use case)
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = 5;       // max requests
+const RATE_WINDOW_MS = 60_000; // per minute
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+  if (entry.count >= RATE_LIMIT) return true;
+  entry.count++;
+  return false;
+}
+
+function getIp(req: NextRequest): string {
+  return (
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+    req.headers.get("x-real-ip") ??
+    "unknown"
+  );
+}
+
+function isValidPhone(phone: string): boolean {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 11;
+}
+
 function createTransporter() {
   return nodemailer.createTransport({
     host: "smtpout.secureserver.net",
@@ -41,16 +71,39 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  // Rate limiting
+  const ip = getIp(req);
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Muitas tentativas. Aguarde um momento e tente novamente." },
+      { status: 429 }
+    );
+  }
+
   const body = await req.json();
   const { email, phone, platform, whatsapp_agreed, data_consent } = body;
 
-  if (!email || !phone || !platform || !whatsapp_agreed || !data_consent) {
+  // Strict presence and type checks
+  if (!email || !phone || !platform || whatsapp_agreed !== true || data_consent !== true) {
     return NextResponse.json({ error: "Campos obrigatórios ausentes." }, { status: 400 });
+  }
+
+  // Input length limits
+  if (
+    typeof email !== "string" || email.length > 254 ||
+    typeof phone !== "string" || phone.length > 20 ||
+    typeof platform !== "string"
+  ) {
+    return NextResponse.json({ error: "Dados inválidos." }, { status: 400 });
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return NextResponse.json({ error: "E-mail inválido." }, { status: 400 });
+  }
+
+  if (!isValidPhone(phone)) {
+    return NextResponse.json({ error: "Telefone inválido. Informe DDD + 9 dígitos." }, { status: 400 });
   }
 
   if (!VALID_PLATFORMS.includes(platform)) {
