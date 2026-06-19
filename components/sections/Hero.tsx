@@ -126,7 +126,7 @@ export function Hero() {
               preparada neste momento para cartas Pokémon TCG.
             </motion.p>
 
-            <motion.div variants={item} className="inline-flex flex-col gap-4">
+            <motion.div variants={item} className="flex flex-col gap-4 w-full max-w-sm">
               <Link href="/beta" className="w-full">
                 <Button
                   variant="primary"

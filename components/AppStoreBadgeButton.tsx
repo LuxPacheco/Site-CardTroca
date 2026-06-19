@@ -6,7 +6,7 @@ export function AppStoreBadgeButton({ store }: { store: "apple" | "google" }) {
       <button
         type="button"
         onClick={() => {}}
-        className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-ds-surface border border-ds-border backdrop-blur-sm cursor-default"
+        className="flex-1 flex items-center gap-3 px-5 py-3 rounded-2xl bg-ds-surface border border-ds-border backdrop-blur-sm cursor-default"
         aria-label="Baixar o CardTroca na App Store"
       >
         <svg className="w-8 h-8 text-ds-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -24,7 +24,7 @@ export function AppStoreBadgeButton({ store }: { store: "apple" | "google" }) {
     <button
       type="button"
       onClick={() => {}}
-      className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-ds-surface border border-ds-border backdrop-blur-sm cursor-default"
+      className="flex-1 flex items-center gap-3 px-5 py-3 rounded-2xl bg-ds-surface border border-ds-border backdrop-blur-sm cursor-default"
       aria-label="Baixar o CardTroca no Google Play"
     >
       <svg className="w-8 h-8" viewBox="0 0 24 24" aria-hidden="true">
