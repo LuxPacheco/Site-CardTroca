@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Smartphone, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Gift, Users, Zap, Phone, Instagram, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Turnstile } from "@marsidev/react-turnstile";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
 type Platform = "ios" | "android" | "";
 type Status = "idle" | "loading" | "success" | "error";
@@ -38,7 +38,7 @@ export function BetaForm() {
   const [isClosed, setIsClosed] = useState(false);
   const [signupCount, setSignupCount] = useState(0);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileRef = useRef<{ reset: () => void } | null>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
 
   useEffect(() => {
     fetch("/api/beta")
