@@ -81,7 +81,6 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
     }),
   });
   const data = await res.json();
-  console.log("[beta] turnstile response:", JSON.stringify(data));
   return data.success === true;
 }
 
@@ -98,17 +97,13 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const { email, phone, platform, whatsapp_agreed, data_consent, turnstile_token } = body;
 
-  console.log("[beta] body keys:", Object.keys(body));
-  console.log("[beta] turnstile_token:", typeof turnstile_token, turnstile_token?.slice?.(0, 20));
-
   // Verify Turnstile CAPTCHA
   if (!turnstile_token || typeof turnstile_token !== "string") {
     return NextResponse.json({ error: "Verificação de segurança necessária." }, { status: 400 });
   }
   try {
     const captchaValid = await verifyTurnstile(turnstile_token, ip);
-    console.log("[beta] captchaValid:", captchaValid);
-    if (!captchaValid) {
+if (!captchaValid) {
       return NextResponse.json({ error: "Falha na verificação de segurança. Tente novamente." }, { status: 400 });
     }
   } catch (captchaError) {
