@@ -373,7 +373,7 @@ export function BetaForm() {
                       Aceito entrar no grupo do WhatsApp do Beta do CardTroca para receber atualizações e participar da comunidade.
                     </label>
                     <p className="text-xs text-ds-text-tertiary mt-1">
-                      Você receberá o convite em até 24h após a inscrição.
+                      Você receberá o convite para o grupo assim que as 50 vagas forem encerradas.
                     </p>
                   </div>
                 </div>
