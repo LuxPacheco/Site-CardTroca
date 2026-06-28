@@ -104,9 +104,14 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-ds-border flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-          <p className="text-xs text-ds-text-tertiary">
-            © {new Date().getFullYear()} CardTroca. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col gap-1">
+            <p className="text-xs text-ds-text-tertiary">
+              © {new Date().getFullYear()} CardTroca. Todos os direitos reservados.
+            </p>
+            <p className="text-xs text-ds-text-tertiary">
+              Software criado e registrado por <span className="font-medium text-ds-text-secondary">Blur Tecnologia</span>.
+            </p>
+          </div>
           <p className="text-xs text-ds-text-tertiary text-center sm:text-right">
             Imagens das cartas © The Pokémon Company. Dados fornecidos por TCGdex e Pokémon TCG API.
           </p>
