@@ -72,20 +72,15 @@ export function Navigation() {
               className="flex items-center gap-2.5 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
               aria-label="CardTroca — Início"
             >
-              <div className="h-[58px] w-[58px] overflow-hidden flex-shrink-0">
-                <Image
-                  src="/splash_logo.webp"
-                  alt=""
-                  width={56}
-                  height={56}
-                  className="h-full w-full object-contain scale-[2.05]"
-                  priority
-                  unoptimized
-                />
-              </div>
-              <span className="font-bold text-ds-text-primary text-lg tracking-tight hidden sm:block">
-                CardTroca
-              </span>
+              <Image
+                src="/logo-vertical-1.svg"
+                alt="CardTroca"
+                width={120}
+                height={72}
+                className="h-10 w-auto"
+                priority
+                unoptimized
+              />
             </a>
 
             {/* Desktop nav links */}

@@ -45,19 +45,14 @@ export function Footer() {
               className="flex items-center gap-2.5"
               aria-label="CardTroca — Início"
             >
-              <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center overflow-hidden bg-white"
-              >
-                <Image
-                  src="/logo.webp"
-                  alt=""
-                  width={36}
-                  height={36}
-                  className="h-full w-full object-contain"
-                  unoptimized
-                />
-              </div>
-              <span className="font-bold text-ds-text-primary text-lg">CardTroca</span>
+              <Image
+                src="/logo-vertical-1.svg"
+                alt="CardTroca"
+                width={120}
+                height={72}
+                className="h-10 w-auto"
+                unoptimized
+              />
             </a>
             <p className="text-ds-text-secondary text-sm leading-relaxed max-w-xs">
               A plataforma definitiva para colecionadores TCG.
