@@ -12,8 +12,12 @@ interface AppDownloadButtonProps {
   className?: string;
 }
 
-const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL;
-const playStoreUrl = process.env.NEXT_PUBLIC_PLAY_STORE_URL;
+const appStoreUrl =
+  process.env.NEXT_PUBLIC_APP_STORE_URL ||
+  "https://apps.apple.com/br/app/cardtroca/id6779094214";
+const playStoreUrl =
+  process.env.NEXT_PUBLIC_PLAY_STORE_URL ||
+  "https://play.google.com/store/apps/details?id=io.cardtroca&pcampaignid=web_share";
 
 function detectStore(): Store {
   const ua = window.navigator.userAgent.toLowerCase();
@@ -36,12 +40,7 @@ export function openAppStore() {
         ? playStoreUrl
         : playStoreUrl || appStoreUrl;
 
-  if (target) {
-    window.open(target, "_blank", "noopener,noreferrer");
-    return;
-  }
-
-  window.alert("O CardTroca estará disponível em breve na App Store e no Google Play.");
+  window.open(target, "_blank", "noopener,noreferrer");
 }
 
 export function AppDownloadButton({
@@ -57,9 +56,9 @@ export function AppDownloadButton({
       fullWidth={fullWidth}
       icon={<Download className="w-4 h-4" />}
       className={className}
-      disabled
+      onClick={openAppStore}
     >
-      Em breve
+      Baixar o app
     </Button>
   );
 }
