@@ -127,16 +127,6 @@ export function Hero() {
             </motion.p>
 
             <motion.div variants={item} className="flex flex-col gap-4 w-full max-w-sm">
-              <Link href="/beta" className="w-full">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  icon={<FlaskConical className="w-5 h-5" />}
-                  fullWidth
-                >
-                  Participe do Beta
-                </Button>
-              </Link>
               <div className="flex flex-row gap-3">
                 <AppStoreBadgeButton store="apple" />
                 <AppStoreBadgeButton store="google" />
