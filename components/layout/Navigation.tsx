@@ -11,8 +11,9 @@ import {
   Moon,
   Menu,
   X,
-  FlaskConical,
+  Download,
 } from "lucide-react";
+import { openAppStore } from "@/components/AppDownloadButton";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -125,11 +126,15 @@ export function Navigation() {
               </button>
 
               {/* CTA */}
-              <Link href="/beta" className="hidden sm:inline-flex">
-                <Button variant="primary" size="sm" icon={<FlaskConical className="w-4 h-4" />}>
-                  Participe do Beta
-                </Button>
-              </Link>
+              <Button
+                variant="primary"
+                size="sm"
+                icon={<Download className="w-4 h-4" />}
+                onClick={openAppStore}
+                className="hidden sm:inline-flex"
+              >
+                Baixe o App
+              </Button>
 
               {/* Mobile menu toggle */}
               <button
@@ -202,11 +207,15 @@ export function Navigation() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-ds-border">
-                <Link href="/beta" onClick={() => setMobileOpen(false)}>
-                  <Button variant="primary" size="md" fullWidth icon={<FlaskConical className="w-4 h-4" />}>
-                    Participe do Beta
-                  </Button>
-                </Link>
+                <Button
+                  variant="primary"
+                  size="md"
+                  fullWidth
+                  icon={<Download className="w-4 h-4" />}
+                  onClick={() => { setMobileOpen(false); openAppStore(); }}
+                >
+                  Baixe o App
+                </Button>
               </div>
             </nav>
           </div>
