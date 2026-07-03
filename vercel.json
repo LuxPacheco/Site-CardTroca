@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/.well-known/:file",
+      "destination": "https://ilkiewcfrmwifnqyjsik.supabase.co/functions/v1/well-known?file=:file"
+    }
+  ]
+}
