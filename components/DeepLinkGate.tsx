@@ -12,15 +12,12 @@ export function DeepLinkGate({ deepLink }: DeepLinkGateProps) {
   const [showFallback, setShowFallback] = useState(false);
 
   useEffect(() => {
-    // Tenta abrir o app
     window.location.href = deepLink;
 
-    // Se a página continuar visível após 2s, o app não abriu
     const timer = setTimeout(() => {
       setShowFallback(true);
     }, 2000);
 
-    // Se o usuário sair da página (app abriu), cancela o timer
     const handleVisibilityChange = () => {
       if (document.hidden) {
         clearTimeout(timer);
