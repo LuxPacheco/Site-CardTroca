@@ -60,7 +60,7 @@ export function DeepLinkGate({ deepLink }: DeepLinkGateProps) {
             Baixe o CardTroca
           </h1>
           <p className="text-ds-text-secondary text-base leading-relaxed">
-            Marketplace de cartas Pokémon TCG. Troque, compre e anuncie com pessoas próximas.
+            A plataforma definitiva para colecionadores TCG.
           </p>
         </div>
 
