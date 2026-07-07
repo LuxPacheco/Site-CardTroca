@@ -1,0 +1,16 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.cardtroca",
+      "sha256_cert_fingerprints": [
+        "12:88:1E:BB:57:FC:92:CD:64:BA:2E:0C:36:26:91:34:3B:66:25:79:E5:DB:DA:1E:95:CD:66:42:D5:0E:D1:5F",
+        "04:35:3C:E0:16:77:BD:ED:C1:C3:B4:F5:63:08:37:43:3A:76:F5:63:FD:7E:8A:3E:3D:A9:9D:84:43:3E:21:C4"
+      ]
+    }
+  }
+]
