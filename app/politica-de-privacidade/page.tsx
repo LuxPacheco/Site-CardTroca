@@ -35,7 +35,7 @@ const sections = [
   {
     title: "Seus direitos pela LGPD",
     content:
-      "Você pode solicitar acesso, correção ou exclusão dos seus dados pessoais a qualquer momento pelo e-mail contato@cardtroca.com. Algumas informações podem ser mantidas pelo período necessário para cumprimento legal, segurança ou prevenção de fraude.",
+      "Você pode solicitar acesso, correção ou exclusão dos seus dados pessoais a qualquer momento. Para excluir sua conta e dados, acesse o menu de configurações dentro do próprio app. Em caso de dúvidas ou dificuldades, entre em contato pelo e-mail contato@cardtroca.com. Algumas informações podem ser mantidas pelo período necessário para cumprimento legal, segurança ou prevenção de fraude.",
   },
   {
     title: "Retenção de dados",
