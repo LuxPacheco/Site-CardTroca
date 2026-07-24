@@ -28,6 +28,11 @@ const sections = [
       "Usamos localização para exibir cartas próximas, filtrar anúncios por distância e melhorar o modo troca. O CardTroca armazena e exibe apenas informações aproximadas, como cidade e estado, e não publica seu endereço exato.",
   },
   {
+    title: "Cookies e tecnologias similares",
+    content:
+      "Usamos armazenamento local necessário para preservar preferências do site, como o tema visual. Também podemos usar a Amplitude, uma ferramenta de análise de navegação, para entender o uso do site e aprimorá-lo. Essa análise só é ativada quando você aceita os cookies opcionais no banner. Você pode alterar sua decisão a qualquer momento pelo link “Preferências de cookies” no rodapé do site.",
+  },
+  {
     title: "Mensagens e negociações",
     content:
       "Mensagens de chat e histórico de negociações podem ser mantidos para permitir conversas entre usuários, encerramento de negociações, avaliações, moderação, segurança e prevenção de fraude.",

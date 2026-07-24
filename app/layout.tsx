@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AmplitudeProvider } from "@/components/AmplitudeProvider";
+import { CookieConsentBanner } from "@/components/CookieConsent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -92,7 +93,10 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-ds-bg text-ds-text-primary">
         <Suspense>
           <AmplitudeProvider>
-            <ThemeProvider>{children}</ThemeProvider>
+            <ThemeProvider>
+              {children}
+              <CookieConsentBanner />
+            </ThemeProvider>
           </AmplitudeProvider>
         </Suspense>
       </body>

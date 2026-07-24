@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { openCookiePreferences } from "@/components/CookieConsent";
 
 const footerLinks = {
   suporte: [
@@ -107,9 +110,18 @@ export function Footer() {
               Software criado e registrado por <span className="font-medium text-ds-text-secondary">Blur Tecnologia</span>.
             </p>
           </div>
-          <p className="text-xs text-ds-text-tertiary text-center sm:text-right">
-            Imagens das cartas © The Pokémon Company. Dados fornecidos por TCGdex e Pokémon TCG API.
-          </p>
+          <div className="flex flex-col items-center gap-2 sm:items-end">
+            <p className="text-xs text-ds-text-tertiary text-center sm:text-right">
+              Imagens das cartas © The Pokémon Company. Dados fornecidos por TCGdex e Pokémon TCG API.
+            </p>
+            <button
+              type="button"
+              onClick={openCookiePreferences}
+              className="text-xs text-ds-text-tertiary underline underline-offset-2 transition-colors hover:text-ds-text-primary"
+            >
+              Preferências de cookies
+            </button>
+          </div>
         </div>
       </div>
     </footer>
